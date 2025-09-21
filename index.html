@@ -442,12 +442,8 @@
       animation: pulse 1.5s infinite;
     }
     
-    .game-buttons {
-      display: flex;
-      gap: 0.5rem;
+    .game-youtube {
       margin-top: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
     }
     
     @keyframes pulse {
@@ -461,6 +457,7 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.7rem 1.2rem;
+      background: #ff0000;
       color: #fff;
       text-decoration: none;
       border-radius: 6px;
@@ -468,21 +465,8 @@
       transition: all 0.2s ease;
     }
 
-    .btn-youtube { 
-      background: #ff0000; 
-    }
-    
-    .btn-youtube:hover { 
+    .btn:hover { 
       background: #cc0000; 
-      transform: translateY(-2px);
-    }
-    
-    .btn-sumula {
-      background: var(--primary);
-    }
-    
-    .btn-sumula:hover {
-      background: var(--primary-dark);
       transform: translateY(-2px);
     }
 
@@ -513,7 +497,7 @@
         width: 100%;
       }
       
-      .game-buttons {
+      .game-youtube {
         order: 1;
         margin-top: 1rem;
       }
@@ -572,15 +556,6 @@
       .game-logo-container {
         width: 50px;
         height: 50px;
-      }
-      
-      .game-buttons {
-        flex-direction: column;
-        width: 100%;
-      }
-      
-      .btn {
-        justify-content: center;
       }
     }
   </style>
@@ -829,18 +804,13 @@
               }
               <p>${g.location}</p>
               <span class="game-status ${statusClass}">${statusText}</span>
-              <div class="game-buttons">
-                ${g.youtube ? `
-                  <a href="${g.youtube}" target="_blank" class="btn btn-youtube">
+              ${g.youtube ? `
+                <div class="game-youtube">
+                  <a href="${g.youtube}" target="_blank" class="btn">
                     <i class="fab fa-youtube"></i> Assistir
                   </a>
-                ` : ""}
-                ${g.sumula ? `
-                  <a href="${g.sumula}" target="_blank" class="btn btn-sumula">
-                    <i class="fas fa-file-alt"></i> Súmula
-                  </a>
-                ` : ""}
-              </div>
+                </div>
+              ` : ""}
             </div>
             
             <div class="game-team">

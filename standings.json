@@ -1,0 +1,67 @@
+{
+  "adulto": [
+    {
+      "teamId": "sparta-pe",
+      "played": 2,
+      "wins": 2,
+      "losses": 0,
+      "pointsFor": 266,
+      "pointsAgainst": 96,
+      "points": 4
+    },
+    {
+      "teamId": "santa-cruz",
+      "played": 3,
+      "wins": 2,
+      "losses": 1,
+      "pointsFor": 266,
+      "pointsAgainst": 296,
+      "points": 4
+    },
+    {
+      "teamId": "aadb",
+      "played": 1,
+      "wins": 1,
+      "losses": 0,
+      "pointsFor": 88,
+      "pointsAgainst": 67,
+      "points": 2
+    },
+    {
+      "teamId": "nautico",
+      "played": 1,
+      "wins": 0,
+      "losses": 1,
+      "pointsFor": 88,
+      "pointsAgainst": 134,
+      "points": 0
+    },
+    {
+      "teamId": "dino",
+      "played": 1,
+      "wins": 0,
+      "losses": 1,
+      "pointsFor": 88,
+      "pointsAgainst": 92,
+      "points": 0
+    },
+    {
+      "teamId": "sport",
+      "played": 1,
+      "wins": 0,
+      "losses": 1,
+      "pointsFor": 67,
+      "pointsAgainst": 88,
+      "points": 0
+    },
+    {
+      "teamId": "mandacaru",
+      "played": 1,
+      "wins": 0,
+      "losses": 1,
+      "pointsFor": 56,
+      "pointsAgainst": 146,
+      "points": 0
+    }
+  ]
+}

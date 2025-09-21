@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pernambuco BasketStats</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ======== Reset e Variáveis ======== */
+    :root {
+      --primary: #0d47a1;
+      --primary-dark: #09316e;
+      --primary-light: #5472d3;
+      --accent: #ffca28;
+      --accent-dark: #ffb300;
+      --text: #333333;
+      --text-light: #666666;
+      --background: #f8f9fa;
+      --card-bg: #ffffff;
+      --border: #e0e0e0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+    
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+
+    /* ======== Header ======== */
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header .logo h1 { 
+      font-size: 1.8rem; 
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    header .logo h1 i {
+      color: var(--accent);
+    }
+
+    nav ul { 
+      list-style: none; 
+      display: flex; 
+      gap: 20px; 
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    nav a:hover, 
+    nav a.active-nav {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--accent);
+    }
+
+    /* ======== Layout geral ======== */
+    main { 
+      padding: 2rem; 
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .page-section { 
+      display: none; 
+      animation: fadeIn 0.4s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .page-section.active { 
+      display: block; 
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary-light);
+    }
+
+    h2 { 
+      color: var(--primary); 
+      font-size: 1.8rem;
+    }
+
+    /* ======== Resumo inicial ======== */
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .summary-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 4px solid var(--primary);
+    }
+
+    .summary-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .summary-card h3 { 
+      font-size: 1rem; 
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+    
+    .summary-card p { 
+      font-size: 1.8rem; 
+      font-weight: bold; 
+      color: var(--primary);
+    }
+
+    .summary-card .icon {
+      font-size: 2rem;
+      color: var(--primary-light);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ======== Players ======== */
+    .players-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .player-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .player-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .player-header {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      gap: 1rem;
+      color: #fff;
+      position: relative;
+    }
+
+    .player-photo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      object-fit: cover;
+      background: var(--card-bg);
+    }
+
+    .player-info {
+      flex: 1;
+    }
+    
+    .player-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+    }
+    
+    .player-info p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* Quadrado transparente para logos dos times */
+    .logo-container {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      border-radius: 8px;
+      padding: 5px;
+    }
+
+    .team-logo {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .stats-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .stats-table th, .stats-table td {
+      border: 1px solid var(--border);
+      padding: 0.7rem;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .stats-table th { 
+      background: #f7f9fc; 
+      font-weight: 600;
+    }
+    
+    .stats-table tr:nth-child(even) {
+      background: #f9fafc;
+    }
+
+    /* ======== Standings ======== */
+    .standings-container {
+      background: var(--card-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    
+    .standings-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .standings-table thead { 
+      background: var(--primary); 
+      color: #fff; 
+    }
+    
+    .standings-table th {
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+    }
+    
+    .standings-table th:first-child {
+      width: 60px;
+    }
+    
+    .standings-table th:nth-child(2) {
+      text-align: left;
+    }
+
+    .standings-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s ease;
+    }
+    
+    .standings-table tbody tr:hover {
+      background: #f5f7ff;
+    }
+
+    .standings-table td {
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .standings-table td:nth-child(2) {
+      text-align: left;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .standings-logo-container {
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      border-radius: 6px;
+      padding: 4px;
+    }
+    
+    .standings-logo {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    
+    .position {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      border-radius: 50%;
+      background: #f0f0f0;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    
+    .position-1 { background: #f8e71c; color: #000; }
+    .position-2 { background: #c4c4c4; color: #000; }
+    .position-3 { background: #cd7f32; color: #000; }
+
+    /* ======== Games ======== */
+    .games-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .game-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+      flex-wrap: wrap;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 4px solid var(--primary);
+      position: relative;
+    }
+    
+    .game-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .game-team {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+    }
+    
+    .game-team strong {
+      font-weight: 600;
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .game-logo-container {
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      border-radius: 10px;
+      padding: 8px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .game-logo {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .game-info {
+      flex: 2;
+      text-align: center;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .game-score {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+      color: var(--primary);
+    }
+    
+    .game-status {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .game-status.upcoming {
+      background: #e3f2fd;
+      color: var(--primary);
+    }
+    
+    .game-status.completed {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    
+    .game-status.live {
+      background: #ffebee;
+      color: #c62828;
+      animation: pulse 1.5s infinite;
+    }
+    
+    .game-buttons {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.2rem;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-youtube { 
+      background: #ff0000; 
+    }
+    
+    .btn-youtube:hover { 
+      background: #cc0000; 
+      transform: translateY(-2px);
+    }
+    
+    .btn-sumula {
+      background: var(--primary);
+    }
+    
+    .btn-sumula:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ======== Footer ======== */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--primary-dark);
+      color: #fff;
+      margin-top: 3rem;
+    }
+    
+    footer p {
+      opacity: 0.9;
+    }
+
+    /* ======== Responsividade ======== */
+    @media (max-width: 992px) {
+      .game-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+      
+      .game-info {
+        order: 0;
+        padding: 0;
+        width: 100%;
+      }
+      
+      .game-buttons {
+        order: 1;
+        margin-top: 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+      
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+      
+      nav a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+      }
+      
+      main {
+        padding: 1rem;
+      }
+      
+      .players-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .standings-table {
+        font-size: 0.85rem;
+      }
+      
+      .standings-table th, 
+      .standings-table td {
+        padding: 0.7rem 0.5rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .summary-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .standings-table {
+        display: block;
+        overflow-x: auto;
+      }
+      
+      .game-team {
+        min-width: 100px;
+      }
+      
+      .game-logo-container {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .game-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .btn {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1><i class="fas fa-basketball-ball"></i> Pernambuco BasketStats</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#" data-page="home" class="active-nav">Início</a></li>
+        <li><a href="#" data-page="stats">Estatísticas</a></li>
+        <li><a href="#" data-page="standings">Classificação</a></li>
+        <li><a href="#" data-page="games">Jogos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Home -->
+    <section id="home" class="page-section active">
+      <div class="section-header">
+        <h2>Bem-vindo ao Campeonato Pernambucano</h2>
+      </div>
+      <div class="summary-cards" id="summaryCards"></div>
+      
+      <div class="section-header">
+        <h2>Top 3 Jogadores</h2>
+      </div>
+      <div id="featuredPlayers" class="players-grid"></div>
+    </section>
+
+    <!-- Estatísticas -->
+    <section id="stats" class="page-section">
+      <div class="section-header">
+        <h2>Estatísticas dos Jogadores</h2>
+      </div>
+      <div id="playersGrid" class="players-grid"></div>
+    </section>
+
+    <!-- Classificação -->
+    <section id="standings" class="page-section">
+      <div class="section-header">
+        <h2>Classificação</h2>
+      </div>
+      <div class="standings-container">
+        <table class="standings-table">
+          <thead>
+            <tr>
+              <th>Pos</th>
+              <th>Time</th>
+              <th>PJ</th>
+              <th>V</th>
+              <th>D</th>
+              <th>PP</th>
+              <th>PC</th>
+              <th>Saldo</th>
+              <th>Pts</th>
+            </tr>
+          </thead>
+          <tbody id="standingsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Jogos -->
+    <section id="games" class="page-section">
+      <div class="section-header">
+        <h2>Jogos</h2>
+      </div>
+      <div class="games-container" id="gamesList"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Pernambuco BasketStats - Todos os direitos reservados</p>
+  </footer>
+
+  <script>
+    let players = [];
+    let games = [];
+    let standings = {};
+    let peTeams = [];
+
+    async function loadData() {
+      try {
+        // Carregar dados dos arquivos JSON
+        const [playersRes, gamesRes, standingsRes, teamsRes] = await Promise.all([
+          fetch("players.json"),
+          fetch("games.json"),
+          fetch("standings.json"),
+          fetch("teams.json")
+        ]);
+
+        // Verificar se as respostas são válidas
+        if (!playersRes.ok) throw new Error("Falha ao carregar players.json");
+        if (!gamesRes.ok) throw new Error("Falha ao carregar games.json");
+        if (!standingsRes.ok) throw new Error("Falha ao carregar standings.json");
+        if (!teamsRes.ok) throw new Error("Falha ao carregar teams.json");
+
+        players = await playersRes.json();
+        games = await gamesRes.json();
+        standings = await standingsRes.json();
+        peTeams = await teamsRes.json();
+
+        renderSummary();
+        renderPlayers();
+        renderFeaturedPlayers();
+        renderStandings();
+        renderGames();
+      } catch (err) {
+        console.error("Erro ao carregar dados JSON:", err);
+        document.getElementById("summaryCards").innerHTML = `
+          <div class="summary-card">
+            <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3>Erro</h3>
+            <p>Dados não carregados</p>
+          </div>
+        `;
+      }
+    }
+
+    function renderPlayers() {
+      const grid = document.getElementById("playersGrid");
+      grid.innerHTML = "";
+      
+      if (players.length === 0) {
+        grid.innerHTML = `<p>Nenhum jogador encontrado. Verifique o arquivo players.json</p>`;
+        return;
+      }
+      
+      players.forEach(p => {
+        const team = peTeams.find(t => t.id === p.teamId) || {};
+        grid.innerHTML += `
+          <div class="player-card">
+            <div class="player-header" style="background:${team.color || '#0d47a1'}">
+              <img src="${p.photo}" class="player-photo" alt="${p.name}">
+              <div class="player-info">
+                <h3>${p.name}</h3>
+                <p>#${p.number} - ${p.position}</p>
+              </div>
+              <div class="logo-container">
+                <img src="${team.logo || 'https://placehold.co/60x60'}" class="team-logo" alt="${team.name}">
+              </div>
+            </div>
+            <table class="stats-table">
+              <tr><th>PPG</th><td>${p.stats.points}</td><th>RPG</th><td>${p.stats.rebounds}</td></tr>
+              <tr><th>APG</th><td>${p.stats.assists}</td><th>SPG</th><td>${p.stats.steals}</td></tr>
+              <tr><th>BPG</th><td>${p.stats.blocks}</td><th>Time</th><td>${team.name || '-'}</td></tr>
+            </table>
+          </div>`;
+      });
+    }
+
+    function renderFeaturedPlayers() {
+      const featured = document.getElementById("featuredPlayers");
+      featured.innerHTML = "";
+      
+      if (players.length === 0) {
+        featured.innerHTML = `<p>Nenhum jogador encontrado.</p>`;
+        return;
+      }
+      
+      [...players].sort((a,b)=>b.stats.points-a.stats.points).slice(0,3).forEach(p=>{
+        const team = peTeams.find(t => t.id === p.teamId) || {};
+        featured.innerHTML += `
+          <div class="player-card">
+            <div class="player-header" style="background:${team.color || '#0d47a1'}">
+              <img src="${p.photo}" class="player-photo" alt="${p.name}">
+              <div class="player-info">
+                <h3>${p.name}</h3>
+                <p>#${p.number} - ${p.position}</p>
+                <p><strong>${p.stats.points} PPG</strong></p>
+              </div>
+              <div class="logo-container">
+                <img src="${team.logo || 'https://placehold.co/60x60'}" class="team-logo" alt="${team.name}">
+              </div>
+            </div>
+          </div>`;
+      });
+    }
+
+    function renderStandings() {
+      const tbody = document.getElementById("standingsBody");
+      tbody.innerHTML = "";
+      
+      if (!standings.adulto || standings.adulto.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9">Nenhum dado de classificação encontrado. Verifique o arquivo standings.json</td></tr>`;
+        return;
+      }
+      
+      standings.adulto.sort((a,b)=>b.points-a.points).forEach((s,i)=>{
+        const team = peTeams.find(t=>t.id===s.teamId) || {};
+        const saldo = s.pointsFor - s.pointsAgainst;
+        const positionClass = i < 3 ? `position-${i+1}` : '';
+        
+        tbody.innerHTML += `
+          <tr>
+            <td><span class="position ${positionClass}">${i+1}</span></td>
+            <td>
+              <div class="standings-logo-container">
+                <img src="${team.logo || 'https://placehold.co/60x60'}" class="standings-logo" alt="${team.name}">
+              </div>
+              ${team.name || s.teamId}
+            </td>
+            <td>${s.played}</td><td>${s.wins}</td><td>${s.losses}</td>
+            <td>${s.pointsFor}</td><td>${s.pointsAgainst}</td>
+            <td>${saldo > 0 ? '+' : ''}${saldo}</td>
+            <td><strong>${s.points}</strong></td>
+          </tr>`;
+      });
+    }
+
+    function renderGames() {
+      const list = document.getElementById("gamesList");
+      list.innerHTML = "";
+      
+      if (games.length === 0) {
+        list.innerHTML = `<p>Nenhum jogo encontrado. Verifique o arquivo games.json</p>`;
+        return;
+      }
+      
+      games.forEach(g => {
+        const home = peTeams.find(t=>t.id===g.homeTeam) || {};
+        const away = peTeams.find(t=>t.id===g.awayTeam) || {};
+        const statusClass = g.status === "completed" ? "completed" : 
+                           g.status === "live" ? "live" : "upcoming";
+        const statusText = g.status === "completed" ? "Finalizado" : 
+                          g.status === "live" ? "Ao Vivo" : "Em Breve";
+        
+        list.innerHTML += `
+          <div class="game-card">
+            <div class="game-team">
+              <div class="game-logo-container">
+                <img src="${home.logo || 'https://placehold.co/60x60'}" class="game-logo" alt="${home.name}">
+              </div>
+              <strong>${home.name || g.homeTeam}</strong>
+            </div>
+            
+            <div class="game-info">
+              <p>${g.date} ${g.time}</p>
+              ${g.status === "completed" ? 
+                `<p class="game-score">${g.homeScore} - ${g.awayScore}</p>` : 
+                `<p class="game-score">VS</p>`
+              }
+              <p>${g.location}</p>
+              <span class="game-status ${statusClass}">${statusText}</span>
+              <div class="game-buttons">
+                ${g.youtube ? `
+                  <a href="${g.youtube}" target="_blank" class="btn btn-youtube">
+                    <i class="fab fa-youtube"></i> Assistir
+                  </a>
+                ` : ""}
+                ${g.sumula ? `
+                  <a href="${g.sumula}" target="_blank" class="btn btn-sumula">
+                    <i class="fas fa-file-alt"></i> Súmula
+                  </a>
+                ` : ""}
+              </div>
+            </div>
+            
+            <div class="game-team">
+              <div class="game-logo-container">
+                <img src="${away.logo || 'https://placehold.co/60x60'}" class="game-logo" alt="${away.name}">
+              </div>
+              <strong>${away.name || g.awayTeam}</strong>
+            </div>
+          </div>`;
+      });
+    }
+
+    function renderSummary() {
+      const container = document.getElementById("summaryCards");
+      
+      if (players.length === 0 || games.length === 0 || peTeams.length === 0) {
+        container.innerHTML = `
+          <div class="summary-card">
+            <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3>Erro</h3>
+            <p>Dados não carregados</p>
+          </div>
+        `;
+        return;
+      }
+      
+      const numTeams = peTeams.length;
+      const numPlayers = players.length;
+      const numGames = games.length;
+      const cestinha = [...players].sort((a,b)=>b.stats.points-a.stats.points)[0];
+      const cestinhaTeam = peTeams.find(t => t.id === cestinha.teamId) || {};
+      
+      container.innerHTML = `
+        <div class="summary-card">
+          <div class="icon"><i class="fas fa-users"></i></div>
+          <h3>Times</h3>
+          <p>${numTeams}</p>
+        </div>
+        <div class="summary-card">
+          <div class="icon"><i class="fas fa-user-friends"></i></div>
+          <h3>Jogadores</h3>
+          <p>${numPlayers}</p>
+        </div>
+        <div class="summary-card">
+          <div class="icon"><i class="fas fa-basketball-ball"></i></div>
+          <h3>Jogos</h3>
+          <p>${numGames}</p>
+        </div>
+        <div class="summary-card">
+          <div class="icon"><i class="fas fa-trophy"></i></div>
+          <h3>Cestinha</h3>
+          <p>${cestinha.name}</p>
+          <small>${cestinhaTeam.name} - ${cestinha.stats.points} PPG</small>
+        </div>
+      `;
+    }
+
+    function setupNavigation() {
+      document.querySelectorAll("nav a[data-page]").forEach(link => {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          // Atualiza a navegação ativa
+          document.querySelectorAll("nav a").forEach(a => a.classList.remove("active-nav"));
+          link.classList.add("active-nav");
+          
+          // Mostra a página correta
+          document.querySelectorAll(".page-section").forEach(sec => sec.classList.remove("active"));
+          document.getElementById(link.dataset.page).classList.add("active");
+        });
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => { 
+      loadData(); 
+      setupNavigation(); 
+    });
+  </script>
+</body>
+</html>

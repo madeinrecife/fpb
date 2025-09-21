@@ -9,19 +9,18 @@
   <style>
     /* ======== Reset e Variáveis ======== */
     :root {
-      --primary: #1a5fce;
-      --primary-dark: #13499c;
-      --primary-light: #3a7de3;
+      --primary: #0d47a1;
+      --primary-dark: #09316e;
+      --primary-light: #5472d3;
       --accent: #ffca28;
       --accent-dark: #ffb300;
-      --text: #e0e0e0;
-      --text-light: #a0a0a0;
-      --background: #121212;
-      --card-bg: #1e1e1e;
-      --card-bg-hover: #252525;
-      --border: #333333;
-      --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.5);
+      --text: #333333;
+      --text-light: #666666;
+      --background: #f8f9fa;
+      --card-bg: #ffffff;
+      --border: #e0e0e0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
     }
     
     * { 
@@ -35,8 +34,6 @@
       background: var(--background);
       color: var(--text);
       line-height: 1.6;
-      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23121212"/><path d="M0 0L100 100" stroke="%23133" stroke-width="1"/><path d="M100 0L0 100" stroke="%23133" stroke-width="1"/></svg>');
     }
 
     h1, h2, h3, h4, h5 {
@@ -46,18 +43,17 @@
 
     /* ======== Header ======== */
     header {
-      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      background: var(--primary);
       color: #fff;
       padding: 1rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 2px solid var(--accent);
     }
 
     header .logo h1 { 
@@ -65,7 +61,6 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     }
     
     header .logo h1 i {
@@ -85,7 +80,6 @@
       padding: 0.5rem 1rem;
       border-radius: 4px;
       transition: all 0.2s ease;
-      position: relative;
     }
 
     nav a:hover, 
@@ -94,34 +88,15 @@
       color: var(--accent);
     }
 
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 50%;
-      width: 0;
-      height: 3px;
-      background: var(--accent);
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
-      border-radius: 2px;
-    }
-
-    nav a.active-nav::after,
-    nav a:hover::after {
-      width: 80%;
-    }
-
     /* Menu de Times */
     .teams-menu {
-      background: linear-gradient(to right, var(--primary-dark), var(--primary));
+      background: var(--primary-light);
       padding: 0.8rem 2rem;
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .team-filter-btn {
@@ -140,14 +115,12 @@
 
     .team-filter-btn:hover {
       background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
     }
 
     .team-filter-btn.active {
       background: var(--accent);
-      color: var(--background);
+      color: var(--text);
       border-color: var(--accent);
-      box-shadow: 0 2px 8px rgba(255, 202, 40, 0.3);
     }
 
     .team-filter-btn img {
@@ -187,9 +160,8 @@
     }
 
     h2 { 
-      color: var(--accent); 
+      color: var(--primary); 
       font-size: 1.8rem;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     }
 
     /* ======== Filtros ======== */
@@ -203,7 +175,6 @@
       flex-wrap: wrap;
       gap: 1rem;
       align-items: center;
-      border: 1px solid var(--border);
     }
 
     .filter-group {
@@ -222,8 +193,7 @@
       padding: 0.7rem 1rem;
       border: 1px solid var(--border);
       border-radius: 6px;
-      background: #2a2a2a;
-      color: var(--text);
+      background: var(--card-bg);
       font-family: 'Open Sans', sans-serif;
       min-width: 180px;
       cursor: pointer;
@@ -232,7 +202,7 @@
     .filter-select:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(26, 95, 206, 0.3);
+      box-shadow: 0 0 0 2px rgba(13, 71, 161, 0.2);
     }
 
     .filter-button {
@@ -243,13 +213,12 @@
       border-radius: 6px;
       cursor: pointer;
       font-weight: 600;
-      transition: all 0.2s ease;
+      transition: background 0.2s ease;
       align-self: flex-end;
     }
 
     .filter-button:hover {
       background: var(--primary-dark);
-      transform: translateY(-2px);
     }
 
     /* ======== Resumo inicial ======== */
@@ -266,52 +235,31 @@
       border-radius: 10px;
       text-align: center;
       box-shadow: var(--shadow);
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       border-left: 4px solid var(--primary);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .summary-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(26, 95, 206, 0.1) 0%, transparent 100%);
-      z-index: 0;
     }
 
     .summary-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow-hover);
-      background: var(--card-bg-hover);
     }
 
     .summary-card h3 { 
       font-size: 1rem; 
       color: var(--text-light);
       margin-bottom: 0.5rem;
-      position: relative;
-      z-index: 1;
     }
     
     .summary-card p { 
       font-size: 1.8rem; 
       font-weight: bold; 
-      color: var(--accent);
-      position: relative;
-      z-index: 1;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      color: var(--primary);
     }
 
     .summary-card .icon {
       font-size: 2rem;
       color: var(--primary-light);
       margin-bottom: 0.5rem;
-      position: relative;
-      z-index: 1;
     }
 
     /* ======== Players ======== */
@@ -326,14 +274,12 @@
       border-radius: 10px;
       overflow: hidden;
       box-shadow: var(--shadow);
-      transition: all 0.3s ease;
-      border: 1px solid var(--border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
     .player-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow-hover);
-      background: var(--card-bg-hover);
     }
 
     .player-header {
@@ -343,18 +289,6 @@
       gap: 1rem;
       color: #fff;
       position: relative;
-      overflow: hidden;
-    }
-
-    .player-header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
-      z-index: 0;
     }
 
     .player-photo {
@@ -364,14 +298,10 @@
       border: 3px solid rgba(255, 255, 255, 0.3);
       object-fit: cover;
       background: var(--card-bg);
-      position: relative;
-      z-index: 1;
     }
 
     .player-info {
       flex: 1;
-      position: relative;
-      z-index: 1;
     }
     
     .player-info h3 {
@@ -391,11 +321,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: transparent;
       border-radius: 8px;
       padding: 5px;
-      position: relative;
-      z-index: 1;
     }
 
     .team-logo {
@@ -407,7 +335,6 @@
     .stats-table {
       width: 100%;
       border-collapse: collapse;
-      background: #2a2a2a;
     }
 
     .stats-table th, .stats-table td {
@@ -418,13 +345,12 @@
     }
 
     .stats-table th { 
-      background: rgba(26, 95, 206, 0.2); 
+      background: #f7f9fc; 
       font-weight: 600;
-      color: var(--accent);
     }
     
     .stats-table tr:nth-child(even) {
-      background: rgba(255, 255, 255, 0.05);
+      background: #f9fafc;
     }
 
     /* ======== Standings ======== */
@@ -433,7 +359,6 @@
       border-radius: 10px;
       overflow: hidden;
       box-shadow: var(--shadow);
-      border: 1px solid var(--border);
     }
     
     .standings-table {
@@ -442,7 +367,7 @@
     }
 
     .standings-table thead { 
-      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); 
+      background: var(--primary); 
       color: #fff; 
     }
     
@@ -466,7 +391,7 @@
     }
     
     .standings-table tbody tr:hover {
-      background: rgba(26, 95, 206, 0.1);
+      background: #f5f7ff;
     }
 
     .standings-table td {
@@ -488,7 +413,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: transparent;
       border-radius: 6px;
       padding: 4px;
     }
@@ -506,7 +431,7 @@
       line-height: 28px;
       text-align: center;
       border-radius: 50%;
-      background: #333;
+      background: #f0f0f0;
       font-weight: bold;
       font-size: 0.9rem;
     }
@@ -531,28 +456,14 @@
       justify-content: space-between;
       box-shadow: var(--shadow);
       flex-wrap: wrap;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       border-left: 4px solid var(--primary);
       position: relative;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-    
-    .game-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(26, 95, 206, 0.1) 0%, transparent 100%);
-      z-index: 0;
     }
     
     .game-card:hover {
       transform: translateY(-3px);
       box-shadow: var(--shadow-hover);
-      background: var(--card-bg-hover);
     }
 
     .game-team {
@@ -562,8 +473,6 @@
       text-align: center;
       flex: 1;
       min-width: 120px;
-      position: relative;
-      z-index: 1;
     }
     
     .game-team strong {
@@ -578,7 +487,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: transparent;
       border-radius: 10px;
       padding: 8px;
       margin-bottom: 0.5rem;
@@ -598,16 +507,13 @@
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
-      position: relative;
-      z-index: 1;
     }
     
     .game-score {
       font-size: 1.8rem;
       font-weight: 700;
       margin: 0.5rem 0;
-      color: var(--accent);
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      color: var(--primary);
     }
     
     .game-status {
@@ -619,27 +525,22 @@
     }
     
     .game-status.upcoming {
-      background: rgba(227, 242, 253, 0.2);
-      color: var(--primary-light);
-      border: 1px solid var(--primary-light);
+      background: #e3f2fd;
+      color: var(--primary);
     }
     
     .game-status.completed {
-      background: rgba(232, 245, 233, 0.2);
-      color: #4caf50;
-      border: 1px solid #4caf50;
+      background: #e8f5e9;
+      color: #2e7d32;
     }
     
     .game-status.live {
-      background: rgba(255, 235, 238, 0.2);
-      color: #f44336;
-      border: 1px solid #f44336;
+      background: #ffebee;
+      color: #c62828;
       animation: pulse 1.5s infinite;
     }
     
-    .game-actions {
-      display: flex;
-      gap: 0.5rem;
+    .game-youtube {
       margin-top: 0.5rem;
     }
     
@@ -654,32 +555,16 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.7rem 1.2rem;
+      background: #ff0000;
+      color: #fff;
       text-decoration: none;
       border-radius: 6px;
       font-weight: 600;
       transition: all 0.2s ease;
-      border: none;
-      cursor: pointer;
-      font-size: 0.9rem;
     }
 
-    .btn-youtube { 
-      background: #ff0000;
-      color: #fff;
-    }
-
-    .btn-youtube:hover { 
+    .btn:hover { 
       background: #cc0000; 
-      transform: translateY(-2px);
-    }
-
-    .btn-sumula {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .btn-sumula:hover {
-      background: var(--primary-dark);
       transform: translateY(-2px);
     }
 
@@ -687,10 +572,9 @@
     footer {
       text-align: center;
       padding: 2rem;
-      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      background: var(--primary-dark);
       color: #fff;
       margin-top: 3rem;
-      border-top: 2px solid var(--accent);
     }
     
     footer p {
@@ -711,7 +595,7 @@
         width: 100%;
       }
       
-      .game-actions {
+      .game-youtube {
         order: 1;
         margin-top: 1rem;
       }
@@ -780,16 +664,6 @@
         overflow-x: auto;
         justify-content: flex-start;
         padding-bottom: 0.5rem;
-      }
-
-      .game-actions {
-        flex-direction: column;
-        width: 100%;
-      }
-      
-      .btn {
-        width: 100%;
-        justify-content: center;
       }
     }
 
@@ -1153,20 +1027,13 @@
               }
               <p>${g.location}</p>
               <span class="game-status ${statusClass}">${statusText}</span>
-              
-              <div class="game-actions">
-                ${g.youtube ? `
-                  <a href="${g.youtube}" target="_blank" class="btn btn-youtube">
+              ${g.youtube ? `
+                <div class="game-youtube">
+                  <a href="${g.youtube}" target="_blank" class="btn">
                     <i class="fab fa-youtube"></i> Assistir
                   </a>
-                ` : ""}
-                
-                ${g.sumula ? `
-                  <a href="${g.sumula}" target="_blank" class="btn btn-sumula">
-                    <i class="fas fa-file-pdf"></i> Súmula
-                  </a>
-                ` : ""}
-              </div>
+                </div>
+              ` : ""}
             </div>
             
             <div class="game-team">

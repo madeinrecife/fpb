@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestão de Basquete</title>
+  <style>
+    /* Estilos Gerais */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+      color: #2c3e50;
+      font-size: 2.5rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    /* Abas */
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    
+    .tab-button {
+      padding: 15px 25px;
+      background: #f8f9fa;
+      border: none;
+      flex: 1;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    
+    .tab-button:hover {
+      background: #e9ecef;
+      transform: translateY(-2px);
+    }
+    
+    .tab-button.active {
+      background: #3498db;
+      color: white;
+      box-shadow: inset 0 -3px 0 #2980b9;
+    }
+    
+    .tab-content {
+      display: none;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    /* Grid para conteúdo das abas */
+    .tab-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    @media (max-width: 900px) {
+      .tab-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Formulários */
+    .form-section {
+      margin-bottom: 20px;
+    }
+    
+    .form-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #3498db;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      border-color: #3498db;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+    
+    .btn {
+      padding: 12px 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 0.3s, transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .btn:hover {
+      background: #2980b9;
+      transform: translateY(-2px);
+    }
+    
+    .btn:active {
+      transform: translateY(0);
+    }
+    
+    .btn-success {
+      background: #27ae60;
+    }
+    
+    .btn-success:hover {
+      background: #219653;
+    }
+    
+    .btn-warning {
+      background: #f39c12;
+    }
+    
+    .btn-warning:hover {
+      background: #e67e22;
+    }
+    
+    .btn-danger {
+      background: #e74c3c;
+    }
+    
+    .btn-danger:hover {
+      background: #c0392b;
+    }
+    
+    .btn-purple {
+      background: #9b59b6;
+    }
+    
+    .btn-purple:hover {
+      background: #8e44ad;
+    }
+    
+    .btn-secondary {
+      background: #95a5a6;
+    }
+    
+    .btn-secondary:hover {
+      background: #7f8c8d;
+    }
+    
+    /* Listas */
+    .list-section {
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+    
+    .list-item {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+    
+    .list-item:hover {
+      background: #f9f9f9;
+    }
+    
+    .item-info {
+      flex: 1;
+    }
+    
+    .item-name {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    
+    .item-details {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      margin-top: 5px;
+    }
+    
+    .item-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .btn-action {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+    }
+    
+    /* Estatísticas */
+    .stats-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px dashed #ddd;
+    }
+    
+    .stats-title {
+      grid-column: 1 / -1;
+      font-size: 1.2rem;
+      color: #3498db;
+      margin-bottom: 10px;
+    }
+    
+    /* Alertas */
+    .alert {
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .alert-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .alert-error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    /* Contador */
+    .counter {
+      display: inline-block;
+      background: #3498db;
+      color: white;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+      line-height: 25px;
+      margin-left: 10px;
+      font-size: 0.9rem;
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #3498db;
+    }
+    
+    .modal-title {
+      font-size: 1.5rem;
+      color: #2c3e50;
+    }
+    
+    .close {
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #7f8c8d;
+    }
+    
+    .close:hover {
+      color: #34495e;
+    }
+    
+    /* Importar/Exportar */
+    .import-export-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px dashed #ddd;
+    }
+    
+    .file-input {
+      display: none;
+    }
+    
+    .file-label {
+      display: block;
+      padding: 12px;
+      background: #f8f9fa;
+      border: 2px dashed #ddd;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: border-color 0.3s;
+    }
+    
+    .file-label:hover {
+      border-color: #3498db;
+    }
+    
+    /* Tabela de Classificação */
+    .standings-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    
+    .standings-table th,
+    .standings-table td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .standings-table th {
+      background-color: #3498db;
+      color: white;
+    }
+    
+    .standings-table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    
+    .standings-table tr:hover {
+      background-color: #e9ecef;
+    }
+    
+    /* Botões de ação */
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .action-buttons .btn {
+      flex: 1;
+      min-width: 120px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sistema de Gestão de Basquete</h1>
+    
+    <div class="tabs">
+      <button class="tab-button active" data-tab="players">Jogadores</button>
+      <button class="tab-button" data-tab="teams">Times</button>
+      <button class="tab-button" data-tab="games">Jogos</button>
+      <button class="tab-button" data-tab="standings">Classificação</button>
+    </div>
+    
+    <!-- Aba de Jogadores -->
+    <div id="players-tab" class="tab-content active">
+      <div class="tab-grid">
+        <div class="form-section">
+          <h2 class="form-title">Gerenciar Jogadores</h2>
+          
+          <div id="playersAlert" class="alert"></div>
+          
+          <form id="playerForm">
+            <input type="hidden" id="playerId" value="">
+            
+            <div class="form-group">
+              <label for="playerName">Nome:</label>
+              <input type="text" id="playerName" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="playerNumber">Número:</label>
+              <input type="number" id="playerNumber" required min="0" max="99">
+            </div>
+            
+            <div class="form-group">
+              <label for="playerTeam">Time:</label>
+              <select id="playerTeam" required>
+                <option value="">Selecione um time</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="playerCategory">Categoria:</label>
+              <select id="playerCategory" required>
+                <option value="">Selecione</option>
+                <option value="SUB9">SUB9</option>
+                <option value="SUB11">SUB11</option>
+                <option value="SUB13">SUB13</option>
+                <option value="SUB15">SUB15</option>
+                <option value="SUB17">SUB17</option>
+                <option value="SUB19">SUB19</option>
+                <option value="ADULTO">ADULTO</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="playerPosition">Posição:</label>
+              <select id="playerPosition" required>
+                <option value="">Selecione</option>
+                <option value="PG">PG</option>
+                <option value="SG">SG</option>
+                <option value="SF">SF</option>
+                <option value="PF">PF</option>
+                <option value="C">C</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="playerPhoto">Foto (URL - opcional):</label>
+              <input type="text" id="playerPhoto" placeholder="Ex: uploads/players/jogador.jpg">
+            </div>
+            
+            <h3 class="stats-title">Estatísticas (opcional)</h3>
+            <div class="stats-section">
+              <div class="form-group">
+                <label for="playerPoints">Pontos:</label>
+                <input type="number" step="0.1" id="playerPoints" value="0" min="0">
+              </div>
+              
+              <div class="form-group">
+                <label for="playerRebounds">Rebotes:</label>
+                <input type="number" step="0.1" id="playerRebounds" value="0" min="0">
+              </div>
+              
+              <div class="form-group">
+                <label for="playerAssists">Assistências:</label>
+                <input type="number" step="0.1" id="playerAssists" value="0" min="0">
+              </div>
+              
+              <div class="form-group">
+                <label for="playerSteals">Roubos:</label>
+                <input type="number" step="0.1" id="playerSteals" value="0" min="0">
+              </div>
+              
+              <div class="form-group">
+                <label for="playerBlocks">Tocos:</label>
+                <input type="number" step="0.1" id="playerBlocks" value="0" min="0">
+              </div>
+            </div>
+            
+            <button type="submit" class="btn" id="playerSubmitBtn">Adicionar Jogador</button>
+          </form>
+          
+          <div class="import-export-section">
+            <h3 class="stats-title">Importar/Exportar Jogadores</h3>
+            <input type="file" id="playersFile" class="file-input" accept=".json">
+            <label for="playersFile" class="file-label">Selecionar arquivo JSON de jogadores</label>
+            <div class="action-buttons">
+              <button id="importPlayersBtn" class="btn btn-warning">Importar JSON</button>
+              <button id="exportPlayersBtn" class="btn btn-success">Exportar Jogadores</button>
+              <button id="clearPlayersBtn" class="btn btn-secondary">Limpar Jogadores</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="list-section">
+          <h2 class="form-title">Jogadores Cadastrados <span id="playersCount" class="counter">0</span></h2>
+          
+          <div id="playersList">
+            <p style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum jogador cadastrado ainda.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Aba de Times -->
+    <div id="teams-tab" class="tab-content">
+      <div class="tab-grid">
+        <div class="form-section">
+          <h2 class="form-title">Gerenciar Times</h2>
+          
+          <div id="teamsAlert" class="alert"></div>
+          
+          <form id="teamForm">
+            <input type="hidden" id="teamId" value="">
+            
+            <div class="form-group">
+              <label for="teamName">Nome do Time:</label>
+              <input type="text" id="teamName" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="teamLogo">Logo (URL):</label>
+              <input type="text" id="teamLogo" placeholder="Ex: logos/sport.png">
+            </div>
+            
+            <div class="form-group">
+              <label for="teamColor">Cor Principal:</label>
+              <input type="color" id="teamColor" value="#3498db">
+            </div>
+            
+            <button type="submit" class="btn" id="teamSubmitBtn">Adicionar Time</button>
+          </form>
+          
+          <div class="import-export-section">
+            <h3 class="stats-title">Importar/Exportar Times</h3>
+            <input type="file" id="teamsFile" class="file-input" accept=".json">
+            <label for="teamsFile" class="file-label">Selecionar arquivo JSON de times</label>
+            <div class="action-buttons">
+              <button id="importTeamsBtn" class="btn btn-warning">Importar JSON</button>
+              <button id="exportTeamsBtn" class="btn btn-success">Exportar Times</button>
+              <button id="clearTeamsBtn" class="btn btn-secondary">Limpar Times</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="list-section">
+          <h2 class="form-title">Times Cadastrados <span id="teamsCount" class="counter">0</span></h2>
+          
+          <div id="teamsList">
+            <p style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum time cadastrado ainda.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Aba de Jogos -->
+    <div id="games-tab" class="tab-content">
+      <div class="tab-grid">
+        <div class="form-section">
+          <h2 class="form-title">Gerenciar Jogos</h2>
+          
+          <div id="gamesAlert" class="alert"></div>
+          
+          <form id="gameForm">
+            <input type="hidden" id="gameId" value="">
+            
+            <div class="form-group">
+              <label for="gameDate">Data:</label>
+              <input type="date" id="gameDate" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="gameTime">Hora:</label>
+              <input type="time" id="gameTime" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="gameCategory">Categoria:</label>
+              <select id="gameCategory" required>
+                <option value="">Selecione</option>
+                <option value="SUB9">SUB9</option>
+                <option value="SUB11">SUB11</option>
+                <option value="SUB13">SUB13</option>
+                <option value="SUB15">SUB15</option>
+                <option value="SUB17">SUB17</option>
+                <option value="SUB19">SUB19</option>
+                <option value="ADULTO">ADULTO</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="gameHomeTeam">Time da Casa:</label>
+              <select id="gameHomeTeam" required>
+                <option value="">Selecione um time</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="gameAwayTeam">Time Visitante:</label>
+              <select id="gameAwayTeam" required>
+                <option value="">Selecione um time</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="gameLocation">Local:</label>
+              <input type="text" id="gameLocation" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="gameStatus">Status:</label>
+              <select id="gameStatus" required>
+                <option value="scheduled">Agendado</option>
+                <option value="completed">Concluído</option>
+                <option value="postponed">Adiado</option>
+                <option value="cancelled">Cancelado</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="gameYoutube">Link do YouTube (opcional):</label>
+              <input type="url" id="gameYoutube" placeholder="https://www.youtube.com/watch?v=...">
+            </div>
+            
+            <div id="scoresSection" style="display: none;">
+              <h3 class="stats-title">Placar</h3>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                  <label for="gameHomeScore">Placar da Casa:</label>
+                  <input type="number" id="gameHomeScore" min="0" value="0">
+                </div>
+                
+                <div class="form-group">
+                  <label for="gameAwayScore">Placar Visitante:</label>
+                  <input type="number" id="gameAwayScore" min="0" value="0">
+                </div>
+              </div>
+            </div>
+            
+            <button type="submit" class="btn" id="gameSubmitBtn">Adicionar Jogo</button>
+          </form>
+          
+          <div class="import-export-section">
+            <h3 class="stats-title">Importar/Exportar Jogos</h3>
+            <input type="file" id="gamesFile" class="file-input" accept=".json">
+            <label for="gamesFile" class="file-label">Selecionar arquivo JSON de jogos</label>
+            <div class="action-buttons">
+              <button id="importGamesBtn" class="btn btn-warning">Importar JSON</button>
+              <button id="exportGamesBtn" class="btn btn-success">Exportar Jogos</button>
+              <button id="clearGamesBtn" class="btn btn-secondary">Limpar Jogos</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="list-section">
+          <h2 class="form-title">Jogos Cadastrados <span id="gamesCount" class="counter">0</span></h2>
+          
+          <div id="gamesList">
+            <p style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum jogo cadastrado ainda.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Aba de Classificação -->
+    <div id="standings-tab" class="tab-content">
+      <div class="tab-grid">
+        <div class="form-section">
+          <h2 class="form-title">Classificação</h2>
+          
+          <div class="form-group">
+            <label for="standingsCategory">Categoria:</label>
+            <select id="standingsCategory">
+              <option value="ADULTO">ADULTO</option>
+              <option value="SUB19">SUB19</option>
+              <option value="SUB17">SUB17</option>
+              <option value="SUB15">SUB15</option>
+              <option value="SUB13">SUB13</option>
+              <option value="SUB11">SUB11</option>
+              <option value="SUB9">SUB9</option>
+            </select>
+          </div>
+          
+          <button id="updateStandingsBtn" class="btn">Atualizar Classificação</button>
+          
+          <div class="import-export-section">
+            <h3 class="stats-title">Importar/Exportar Classificação</h3>
+            <input type="file" id="standingsFile" class="file-input" accept=".json">
+            <label for="standingsFile" class="file-label">Selecionar arquivo JSON de classificação</label>
+            <div class="action-buttons">
+              <button id="importStandingsBtn" class="btn btn-warning">Importar JSON</button>
+              <button id="exportStandingsBtn" class="btn btn-success">Exportar Classificação</button>
+              <button id="clearStandingsBtn" class="btn btn-secondary">Limpar Classificação</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="list-section">
+          <h2 class="form-title">Tabela de Classificação - <span id="standingsCategoryTitle">ADULTO</span></h2>
+          
+          <table class="standings-table">
+            <thead>
+              <tr>
+                <th>Pos</th>
+                <th>Time</th>
+                <th>J</th>
+                <th>V</th>
+                <th>D</th>
+                <th>PF</th>
+                <th>PA</th>
+                <th>Pts</th>
+              </tr>
+            </thead>
+            <tbody id="standingsTable">
+              <tr>
+                <td colspan="8" style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum dado de classificação disponível.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmação -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Confirmar Exclusão</h2>
+        <span class="close" onclick="closeModal('confirmModal')">&times;</span>
+      </div>
+      <p id="confirmMessage" style="margin-bottom: 20px;">Tem certeza que deseja excluir este item?</p>
+      <div style="display: flex; gap: 10px; justify-content: flex-end;">
+        <button class="btn" onclick="closeModal('confirmModal')">Cancelar</button>
+        <button class="btn btn-danger" id="confirmDeleteBtn">Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmação para Limpar Dados -->
+  <div id="clearDataModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Confirmar Limpeza de Dados</h2>
+        <span class="close" onclick="closeModal('clearDataModal')">&times;</span>
+      </div>
+      <p id="clearDataMessage" style="margin-bottom: 20px;">Tem certeza que deseja limpar todos os dados?</p>
+      <div style="display: flex; gap: 10px; justify-content: flex-end;">
+        <button class="btn" onclick="closeModal('clearDataModal')">Cancelar</button>
+        <button class="btn btn-danger" id="confirmClearBtn">Limpar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dados da aplicação
+    let players = [];
+    let teams = [];
+    let games = [];
+    let standings = {};
+    let nextPlayerId = 1;
+    let nextTeamId = 1;
+    let nextGameId = 1;
+    
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', function() {
+      loadAllData();
+      setupEventListeners();
+      updateAllLists();
+      populateTeamSelects();
+      updateStandings();
+    });
+    
+    // Configurar event listeners
+    function setupEventListeners() {
+      // Navegação por abas
+      document.querySelectorAll('.tab-button').forEach(button => {
+        button.addEventListener('click', function() {
+          const tab = this.dataset.tab;
+          switchTab(tab);
+        });
+      });
+      
+      // Formulários
+      document.getElementById('playerForm').addEventListener('submit', handlePlayerSubmit);
+      document.getElementById('teamForm').addEventListener('submit', handleTeamSubmit);
+      document.getElementById('gameForm').addEventListener('submit', handleGameSubmit);
+      
+      // Botões de importação
+      document.getElementById('importPlayersBtn').addEventListener('click', () => importJSON('players'));
+      document.getElementById('importTeamsBtn').addEventListener('click', () => importJSON('teams'));
+      document.getElementById('importGamesBtn').addEventListener('click', () => importJSON('games'));
+      document.getElementById('importStandingsBtn').addEventListener('click', () => importJSON('standings'));
+      
+      // Botões de exportação
+      document.getElementById('exportPlayersBtn').addEventListener('click', () => exportJSON('players'));
+      document.getElementById('exportTeamsBtn').addEventListener('click', () => exportJSON('teams'));
+      document.getElementById('exportGamesBtn').addEventListener('click', () => exportJSON('games'));
+      document.getElementById('exportStandingsBtn').addEventListener('click', () => exportJSON('standings'));
+      
+      // Botões de limpeza
+      document.getElementById('clearPlayersBtn').addEventListener('click', () => confirmClearData('players'));
+      document.getElementById('clearTeamsBtn').addEventListener('click', () => confirmClearData('teams'));
+      document.getElementById('clearGamesBtn').addEventListener('click', () => confirmClearData('games'));
+      document.getElementById('clearStandingsBtn').addEventListener('click', () => confirmClearData('standings'));
+      
+      // Status do jogo (mostrar/ocultar placar)
+      document.getElementById('gameStatus').addEventListener('change', function() {
+        document.getElementById('scoresSection').style.display = 
+          this.value === 'completed' ? 'block' : 'none';
+      });
+      
+      // Atualizar classificação
+      document.getElementById('updateStandingsBtn').addEventListener('click', updateStandings);
+      document.getElementById('standingsCategory').addEventListener('change', function() {
+        document.getElementById('standingsCategoryTitle').textContent = this.value;
+        displayStandings(this.value);
+      });
+    }
+    
+    // Carregar todos os dados do localStorage
+    function loadAllData() {
+      // Carregar jogadores
+      const savedPlayers = localStorage.getItem('basketballPlayers');
+      if (savedPlayers) {
+        players = JSON.parse(savedPlayers);
+        if (players.length > 0) {
+          nextPlayerId = Math.max(...players.map(p => p.id)) + 1;
+        }
+      }
+      
+      // Carregar times
+      const savedTeams = localStorage.getItem('basketballTeams');
+      if (savedTeams) {
+        teams = JSON.parse(savedTeams);
+        if (teams.length > 0) {
+          nextTeamId = Math.max(...teams.map(t => {
+            if (!isNaN(t.id)) return parseInt(t.id);
+            return 0;
+          })) + 1;
+        }
+      } else {
+        // Inicializar com alguns times de exemplo
+        teams = [
+          { id: "sport", name: "Sport Recife", logo: "https://sportrecife.com.br/wp-content/uploads/2024/06/image19.png", color: "#050000" },
+          { id: "nautico", name: "Náutico", logo: "https://upload.wikimedia.org/wikipedia/pt/d/de/Simbolo-escudo-nautico.png", color: "#f50202" },
+          { id: "santa-cruz", name: "Santa Cruz", logo: "https://logodownload.org/wp-content/uploads/2017/02/Santa-Cruz-fc-logo-escudo.png", color: "#b5b5b5" },
+          { id: "dino", name: "Dino Basquete", logo: "https://blogger.googleusercontent.com/img/a/AVvXsEgY3ec6pVg0Qib8BMvodjDynOkTuResrkisrcI0ZKZcyVibG2r1OtkG3Iuj1p8Unc-7Oklu4y16Ifpm4q_MHUJmxkFb1jkYLJTnnmn4qgLeqZMxkSHDiTsK-SS8h5MJ8OJx_lRQg8HhjYAT5W8bMgfXI3fVLP3tyBvH0GNJJOyHfbXw0aflvGtjIWjyhfHe", color: "#87007e" }
+        ];
+        saveData('teams');
+      }
+      
+      // Carregar jogos
+      const savedGames = localStorage.getItem('basketballGames');
+      if (savedGames) {
+        games = JSON.parse(savedGames);
+        if (games.length > 0) {
+          nextGameId = Math.max(...games.map(g => g.id)) + 1;
+        }
+      } else {
+        // Inicializar com alguns jogos de exemplo
+        games = [
+          {
+            "id": 1,
+            "date": "2023-10-15",
+            "time": "19:00",
+            "category": "ADULTO",
+            "homeTeam": "sport",
+            "awayTeam": "nautico",
+            "homeScore": 85,
+            "awayScore": 78,
+            "location": "Ginásio do Sport",
+            "status": "completed",
+            "youtube": "https://www.youtube.com/watch?v=abc123"
+          },
+          {
+            "id": 2,
+            "date": "2023-10-16",
+            "time": "20:00",
+            "category": "ADULTO",
+            "homeTeam": "santa-cruz",
+            "awayTeam": "dino",
+            "homeScore": 92,
+            "awayScore": 88,
+            "location": "Arena de Santa Cruz",
+            "status": "completed",
+            "youtube": "https://www.youtube.com/watch?v=def456"
+          }
+        ];
+        saveData('games');
+      }
+      
+      // Carregar classificação
+      const savedStandings = localStorage.getItem('basketballStandings');
+      if (savedStandings) {
+        standings = JSON.parse(savedStandings);
+      }
+    }
+    
+    // Salvar dados no localStorage
+    function saveData(type) {
+      switch(type) {
+        case 'players':
+          localStorage.setItem('basketballPlayers', JSON.stringify(players));
+          break;
+        case 'teams':
+          localStorage.setItem('basketballTeams', JSON.stringify(teams));
+          break;
+        case 'games':
+          localStorage.setItem('basketballGames', JSON.stringify(games));
+          break;
+        case 'standings':
+          localStorage.setItem('basketballStandings', JSON.stringify(standings));
+          break;
+      }
+    }
+    
+    // Mudar de aba
+    function switchTab(tab) {
+      // Desativar todas as abas
+      document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      
+      // Ativar a aba selecionada
+      document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+      document.getElementById(`${tab}-tab`).classList.add('active');
+      
+      // Se for a aba de classificação, atualizar a classificação
+      if (tab === 'standings') {
+        updateStandings();
+      }
+    }
+    
+    // Preencher selects de times
+    function populateTeamSelects() {
+      const playerTeamSelect = document.getElementById('playerTeam');
+      const gameHomeTeamSelect = document.getElementById('gameHomeTeam');
+      const gameAwayTeamSelect = document.getElementById('gameAwayTeam');
+      
+      // Limpar selects
+      playerTeamSelect.innerHTML = '<option value="">Selecione um time</option>';
+      gameHomeTeamSelect.innerHTML = '<option value="">Selecione um time</option>';
+      gameAwayTeamSelect.innerHTML = '<option value="">Selecione um time</option>';
+      
+      // Adicionar opções
+      teams.forEach(team => {
+        const option = document.createElement('option');
+        option.value = team.id;
+        option.textContent = team.name;
+        
+        playerTeamSelect.appendChild(option.cloneNode(true));
+        gameHomeTeamSelect.appendChild(option.cloneNode(true));
+        gameAwayTeamSelect.appendChild(option.cloneNode(true));
+      });
+    }
+    
+    // Manipular envio do formulário de jogadores
+    function handlePlayerSubmit(e) {
+      e.preventDefault();
+      
+      const playerId = document.getElementById("playerId").value;
+      let player;
+      
+      if (playerId) {
+        // Modo edição
+        const index = players.findIndex(p => p.id == playerId);
+        if (index !== -1) {
+          player = players[index];
+          player.name = document.getElementById("playerName").value;
+          player.number = parseInt(document.getElementById("playerNumber").value);
+          player.teamId = document.getElementById("playerTeam").value;
+          player.category = document.getElementById("playerCategory").value;
+          player.position = document.getElementById("playerPosition").value;
+          player.photo = document.getElementById("playerPhoto").value || "";
+          player.stats = {
+            points: parseFloat(document.getElementById("playerPoints").value) || 0,
+            rebounds: parseFloat(document.getElementById("playerRebounds").value) || 0,
+            assists: parseFloat(document.getElementById("playerAssists").value) || 0,
+            steals: parseFloat(document.getElementById("playerSteals").value) || 0,
+            blocks: parseFloat(document.getElementById("playerBlocks").value) || 0,
+          };
+          
+          players[index] = player;
+          showAlert('playersAlert', 'Jogador atualizado com sucesso!', 'success');
+        }
+      } else {
+        // Modo adição
+        player = {
+          id: nextPlayerId++,
+          name: document.getElementById("playerName").value,
+          number: parseInt(document.getElementById("playerNumber").value),
+          teamId: document.getElementById("playerTeam").value,
+          category: document.getElementById("playerCategory").value,
+          position: document.getElementById("playerPosition").value,
+          photo: document.getElementById("playerPhoto").value || "",
+          stats: {
+            points: parseFloat(document.getElementById("playerPoints").value) || 0,
+            rebounds: parseFloat(document.getElementById("playerRebounds").value) || 0,
+            assists: parseFloat(document.getElementById("playerAssists").value) || 0,
+            steals: parseFloat(document.getElementById("playerSteals").value) || 0,
+            blocks: parseFloat(document.getElementById("playerBlocks").value) || 0,
+          }
+        };
+        
+        players.push(player);
+        showAlert('playersAlert', 'Jogador adicionado com sucesso!', 'success');
+      }
+      
+      saveData('players');
+      updatePlayersList();
+      document.getElementById("playerForm").reset();
+      document.getElementById("playerId").value = "";
+      document.getElementById("playerSubmitBtn").textContent = "Adicionar Jogador";
+    }
+    
+    // Manipular envio do formulário de times
+    function handleTeamSubmit(e) {
+      e.preventDefault();
+      
+      const teamId = document.getElementById("teamId").value;
+      let team;
+      
+      if (teamId) {
+        // Modo edição
+        const index = teams.findIndex(t => t.id == teamId);
+        if (index !== -1) {
+          team = teams[index];
+          team.name = document.getElementById("teamName").value;
+          team.logo = document.getElementById("teamLogo").value;
+          team.color = document.getElementById("teamColor").value;
+          
+          teams[index] = team;
+          showAlert('teamsAlert', 'Time atualizado com sucesso!', 'success');
+        }
+      } else {
+        // Modo adição - criar ID a partir do nome
+        const teamName = document.getElementById("teamName").value;
+        const newId = teamName.toLowerCase().replace(/\s+/g, '-');
+        
+        team = {
+          id: newId,
+          name: teamName,
+          logo: document.getElementById("teamLogo").value,
+          color: document.getElementById("teamColor").value
+        };
+        
+        teams.push(team);
+        showAlert('teamsAlert', 'Time adicionado com sucesso!', 'success');
+      }
+      
+      saveData('teams');
+      updateTeamsList();
+      populateTeamSelects();
+      document.getElementById("teamForm").reset();
+      document.getElementById("teamId").value = "";
+      document.getElementById("teamSubmitBtn").textContent = "Adicionar Time";
+    }
+    
+    // Manipular envio do formulário de jogos
+    function handleGameSubmit(e) {
+      e.preventDefault();
+      
+      const gameId = document.getElementById("gameId").value;
+      let game;
+      
+      if (gameId) {
+        // Modo edição
+        const index = games.findIndex(g => g.id == gameId);
+        if (index !== -1) {
+          game = games[index];
+          game.date = document.getElementById("gameDate").value;
+          game.time = document.getElementById("gameTime").value;
+          game.category = document.getElementById("gameCategory").value;
+          game.homeTeam = document.getElementById("gameHomeTeam").value;
+          game.awayTeam = document.getElementById("gameAwayTeam").value;
+          game.location = document.getElementById("gameLocation").value;
+          game.status = document.getElementById("gameStatus").value;
+          game.youtube = document.getElementById("gameYoutube").value || null;
+          
+          if (game.status === 'completed') {
+            game.homeScore = parseInt(document.getElementById("gameHomeScore").value) || 0;
+            game.awayScore = parseInt(document.getElementById("gameAwayScore").value) || 0;
+          } else {
+            game.homeScore = null;
+            game.awayScore = null;
+          }
+          
+          games[index] = game;
+          showAlert('gamesAlert', 'Jogo atualizado com sucesso!', 'success');
+        }
+      } else {
+        // Modo adição
+        game = {
+          id: nextGameId++,
+          date: document.getElementById("gameDate").value,
+          time: document.getElementById("gameTime").value,
+          category: document.getElementById("gameCategory").value,
+          homeTeam: document.getElementById("gameHomeTeam").value,
+          awayTeam: document.getElementById("gameAwayTeam").value,
+          location: document.getElementById("gameLocation").value,
+          status: document.getElementById("gameStatus").value,
+          youtube: document.getElementById("gameYoutube").value || null
+        };
+        
+        if (game.status === 'completed') {
+          game.homeScore = parseInt(document.getElementById("gameHomeScore").value) || 0;
+          game.awayScore = parseInt(document.getElementById("gameAwayScore").value) || 0;
+        } else {
+          game.homeScore = null;
+          game.awayScore = null;
+        }
+        
+        games.push(game);
+        showAlert('gamesAlert', 'Jogo adicionado com sucesso!', 'success');
+      }
+      
+      saveData('games');
+      updateGamesList();
+      document.getElementById("gameForm").reset();
+      document.getElementById("gameId").value = "";
+      document.getElementById("scoresSection").style.display = 'none';
+      document.getElementById("gameSubmitBtn").textContent = "Adicionar Jogo";
+    }
+    
+    // Atualizar todas as listas
+    function updateAllLists() {
+      updatePlayersList();
+      updateTeamsList();
+      updateGamesList();
+    }
+    
+    // Atualizar lista de jogadores
+    function updatePlayersList() {
+      const playersList = document.getElementById("playersList");
+      const playersCount = document.getElementById("playersCount");
+      
+      if (players.length === 0) {
+        playersList.innerHTML = '<p style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum jogador cadastrado ainda.</p>';
+        playersCount.textContent = '0';
+        return;
+      }
+      
+      playersList.innerHTML = '';
+      playersCount.textContent = players.length;
+      
+      players.forEach(player => {
+        const team = teams.find(t => t.id === player.teamId) || { name: 'Time desconhecido' };
+        
+        const playerItem = document.createElement("div");
+        playerItem.className = "list-item";
+        
+        playerItem.innerHTML = `
+          <div class="item-info">
+            <div class="item-name">${player.name} (#${player.number})</div>
+            <div class="item-details">${team.name} • ${player.category} • ${player.position}</div>
+            <div class="item-details">Pontos: ${player.stats.points} | Rebotes: ${player.stats.rebounds} | Assist: ${player.stats.assists}</div>
+          </div>
+          <div class="item-actions">
+            <button class="btn btn-warning btn-action" onclick="editPlayer(${player.id})">Editar</button>
+            <button class="btn btn-danger btn-action" onclick="confirmDelete('player', ${player.id})">Excluir</button>
+          </div>
+        `;
+        
+        playersList.appendChild(playerItem);
+      });
+    }
+    
+    // Atualizar lista de times
+    function updateTeamsList() {
+      const teamsList = document.getElementById("teamsList");
+      const teamsCount = document.getElementById("teamsCount");
+      
+      if (teams.length === 0) {
+        teamsList.innerHTML = '<p style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum time cadastrado ainda.</p>';
+        teamsCount.textContent = '0';
+        return;
+      }
+      
+      teamsList.innerHTML = '';
+      teamsCount.textContent = teams.length;
+      
+      teams.forEach(team => {
+        const teamItem = document.createElement("div");
+        teamItem.className = "list-item";
+        
+        teamItem.innerHTML = `
+          <div class="item-info">
+            <div class="item-name">${team.name}</div>
+            <div class="item-details">ID: ${team.id}</div>
+          </div>
+          <div class="item-actions">
+            <button class="btn btn-warning btn-action" onclick="editTeam('${team.id}')">Editar</button>
+            <button class="btn btn-danger btn-action" onclick="confirmDelete('team', '${team.id}')">Excluir</button>
+          </div>
+        `;
+        
+        teamsList.appendChild(teamItem);
+      });
+    }
+    
+    // Atualizar lista de jogos
+    function updateGamesList() {
+      const gamesList = document.getElementById("gamesList");
+      const gamesCount = document.getElementById("gamesCount");
+      
+      if (games.length === 0) {
+        gamesList.innerHTML = '<p style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum jogo cadastrado ainda.</p>';
+        gamesCount.textContent = '0';
+        return;
+      }
+      
+      gamesList.innerHTML = '';
+      gamesCount.textContent = games.length;
+      
+      // Ordenar jogos por data (mais recente primeiro)
+      const sortedGames = [...games].sort((a, b) => new Date(b.date) - new Date(a.date));
+      
+      sortedGames.forEach(game => {
+        const homeTeam = teams.find(t => t.id === game.homeTeam) || { name: game.homeTeam };
+        const awayTeam = teams.find(t => t.id === game.awayTeam) || { name: game.awayTeam };
+        
+        const gameItem = document.createElement("div");
+        gameItem.className = "list-item";
+        
+        let scoreInfo = '';
+        if (game.status === 'completed') {
+          scoreInfo = `${game.homeScore} - ${game.awayScore}`;
+        } else {
+          const statusMap = {
+            'scheduled': 'Agendado',
+            'postponed': 'Adiado',
+            'cancelled': 'Cancelado'
+          };
+          scoreInfo = statusMap[game.status] || game.status;
+        }
+        
+        gameItem.innerHTML = `
+          <div class="item-info">
+            <div class="item-name">${homeTeam.name} vs ${awayTeam.name}</div>
+            <div class="item-details">${game.date} ${game.time} • ${game.category} • ${game.location}</div>
+            <div class="item-details">${scoreInfo}</div>
+          </div>
+          <div class="item-actions">
+            <button class="btn btn-warning btn-action" onclick="editGame(${game.id})">Editar</button>
+            <button class="btn btn-danger btn-action" onclick="confirmDelete('game', ${game.id})">Excluir</button>
+          </div>
+        `;
+        
+        gamesList.appendChild(gameItem);
+      });
+    }
+    
+    // Editar jogador
+    function editPlayer(id) {
+      const player = players.find(p => p.id === id);
+      if (!player) return;
+      
+      // Preencher o formulário
+      document.getElementById("playerId").value = player.id;
+      document.getElementById("playerName").value = player.name;
+      document.getElementById("playerNumber").value = player.number;
+      document.getElementById("playerTeam").value = player.teamId;
+      document.getElementById("playerCategory").value = player.category;
+      document.getElementById("playerPosition").value = player.position;
+      document.getElementById("playerPhoto").value = player.photo || "";
+      document.getElementById("playerPoints").value = player.stats.points;
+      document.getElementById("playerRebounds").value = player.stats.rebounds;
+      document.getElementById("playerAssists").value = player.stats.assists;
+      document.getElementById("playerSteals").value = player.stats.steals;
+      document.getElementById("playerBlocks").value = player.stats.blocks;
+      
+      // Mudar texto do botão
+      document.getElementById("playerSubmitBtn").textContent = "Atualizar Jogador";
+      
+      // Rolar para o topo do formulário
+      document.getElementById("playerForm").scrollIntoView();
+    }
+    
+    // Editar time
+    function editTeam(id) {
+      const team = teams.find(t => t.id === id);
+      if (!team) return;
+      
+      // Preencher o formulário
+      document.getElementById("teamId").value = team.id;
+      document.getElementById("teamName").value = team.name;
+      document.getElementById("teamLogo").value = team.logo;
+      document.getElementById("teamColor").value = team.color;
+      
+      // Mudar texto do botão
+      document.getElementById("teamSubmitBtn").textContent = "Atualizar Time";
+      
+      // Rolar para o topo do formulário
+      document.getElementById("teamForm").scrollIntoView();
+    }
+    
+    // Editar jogo
+    function editGame(id) {
+      const game = games.find(g => g.id === id);
+      if (!game) return;
+      
+      // Preencher o formulário
+      document.getElementById("gameId").value = game.id;
+      document.getElementById("gameDate").value = game.date;
+      document.getElementById("gameTime").value = game.time;
+      document.getElementById("gameCategory").value = game.category;
+      document.getElementById("gameHomeTeam").value = game.homeTeam;
+      document.getElementById("gameAwayTeam").value = game.awayTeam;
+      document.getElementById("gameLocation").value = game.location;
+      document.getElementById("gameStatus").value = game.status;
+      document.getElementById("gameYoutube").value = game.youtube || "";
+      
+      if (game.status === 'completed') {
+        document.getElementById("gameHomeScore").value = game.homeScore;
+        document.getElementById("gameAwayScore").value = game.awayScore;
+        document.getElementById("scoresSection").style.display = 'block';
+      } else {
+        document.getElementById("scoresSection").style.display = 'none';
+      }
+      
+      // Mudar texto do botão
+      document.getElementById("gameSubmitBtn").textContent = "Atualizar Jogo";
+      
+      // Rolar para o topo do formulário
+      document.getElementById("gameForm").scrollIntoView();
+    }
+    
+    // Confirmar exclusão
+    function confirmDelete(type, id) {
+      const modal = document.getElementById("confirmModal");
+      const message = document.getElementById("confirmMessage");
+      const confirmBtn = document.getElementById("confirmDeleteBtn");
+      
+      let itemName = "";
+      
+      switch(type) {
+        case 'player':
+          const player = players.find(p => p.id === id);
+          itemName = player ? `o jogador "${player.name}"` : "este jogador";
+          break;
+        case 'team':
+          const team = teams.find(t => t.id === id);
+          itemName = team ? `o time "${team.name}"` : "este time";
+          break;
+        case 'game':
+          const game = games.find(g => g.id === id);
+          if (game) {
+            const homeTeam = teams.find(t => t.id === game.homeTeam) || { name: game.homeTeam };
+            const awayTeam = teams.find(t => t.id === game.awayTeam) || { name: game.awayTeam };
+            itemName = `o jogo entre ${homeTeam.name} e ${awayTeam.name}`;
+          } else {
+            itemName = "este jogo";
+          }
+          break;
+      }
+      
+      message.textContent = `Tem certeza que deseja excluir ${itemName}?`;
+      
+      confirmBtn.onclick = function() {
+        deleteItem(type, id);
+        closeModal('confirmModal');
+      };
+      
+      modal.style.display = "flex";
+    }
+    
+    // Excluir item
+    function deleteItem(type, id) {
+      switch(type) {
+        case 'player':
+          players = players.filter(player => player.id !== id);
+          saveData('players');
+          updatePlayersList();
+          showAlert('playersAlert', 'Jogador excluído com sucesso!', 'success');
+          break;
+        case 'team':
+          // Verificar se o time está sendo usado em jogadores ou jogos
+          const playersWithTeam = players.filter(p => p.teamId === id);
+          const gamesWithTeam = games.filter(g => g.homeTeam === id || g.awayTeam === id);
+          
+          if (playersWithTeam.length > 0 || gamesWithTeam.length > 0) {
+            showAlert('teamsAlert', 'Não é possível excluir este time pois está sendo usado em jogadores ou jogos.', 'error');
+            return;
+          }
+          
+          teams = teams.filter(team => team.id !== id);
+          saveData('teams');
+          updateTeamsList();
+          populateTeamSelects();
+          showAlert('teamsAlert', 'Time excluído com sucesso!', 'success');
+          break;
+        case 'game':
+          games = games.filter(game => game.id !== id);
+          saveData('games');
+          updateGamesList();
+          showAlert('gamesAlert', 'Jogo excluído com sucesso!', 'success');
+          break;
+      }
+    }
+    
+    // Confirmar limpeza de dados
+    function confirmClearData(type) {
+      const modal = document.getElementById("clearDataModal");
+      const message = document.getElementById("clearDataMessage");
+      const confirmBtn = document.getElementById("confirmClearBtn");
+      
+      let itemName = "";
+      let count = 0;
+      
+      switch(type) {
+        case 'players':
+          itemName = "todos os jogadores";
+          count = players.length;
+          break;
+        case 'teams':
+          itemName = "todos os times";
+          count = teams.length;
+          break;
+        case 'games':
+          itemName = "todos os jogos";
+          count = games.length;
+          break;
+        case 'standings':
+          itemName = "todas as classificações";
+          count = Object.keys(standings).length;
+          break;
+      }
+      
+      if (count === 0) {
+        showAlert(`${type}Alert`, `Não há ${itemName} para limpar.`, 'error');
+        return;
+      }
+      
+      message.textContent = `Tem certeza que deseja limpar ${itemName}? Esta ação não pode ser desfeita.`;
+      
+      confirmBtn.onclick = function() {
+        clearData(type);
+        closeModal('clearDataModal');
+      };
+      
+      modal.style.display = "flex";
+    }
+    
+    // Limpar dados
+    function clearData(type) {
+      switch(type) {
+        case 'players':
+          players = [];
+          nextPlayerId = 1;
+          saveData('players');
+          updatePlayersList();
+          showAlert('playersAlert', 'Todos os jogadores foram removidos com sucesso!', 'success');
+          break;
+        case 'teams':
+          // Verificar se há jogadores ou jogos usando os times
+          if (players.length > 0) {
+            showAlert('teamsAlert', 'Não é possível limpar os times pois existem jogadores associados a eles.', 'error');
+            return;
+          }
+          
+          if (games.length > 0) {
+            showAlert('teamsAlert', 'Não é possível limpar os times pois existem jogos associados a eles.', 'error');
+            return;
+          }
+          
+          teams = [];
+          saveData('teams');
+          updateTeamsList();
+          populateTeamSelects();
+          showAlert('teamsAlert', 'Todos os times foram removidos com sucesso!', 'success');
+          break;
+        case 'games':
+          games = [];
+          nextGameId = 1;
+          saveData('games');
+          updateGamesList();
+          showAlert('gamesAlert', 'Todos os jogos foram removidos com sucesso!', 'success');
+          break;
+        case 'standings':
+          standings = {};
+          saveData('standings');
+          displayStandings(document.getElementById('standingsCategory').value);
+          showAlert('standingsAlert', 'Todas as classificações foram removidas com sucesso!', 'success');
+          break;
+      }
+    }
+    
+    // Fechar modal
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = "none";
+    }
+    
+    // Importar JSON
+    function importJSON(type) {
+      const fileInput = document.getElementById(`${type}File`);
+      const file = fileInput.files[0];
+      
+      if (!file) {
+        showAlert(`${type}Alert`, 'Por favor, selecione um arquivo JSON primeiro.', 'error');
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const importedData = JSON.parse(e.target.result);
+          
+          switch(type) {
+            case 'players':
+              if (!Array.isArray(importedData)) {
+                showAlert('playersAlert', 'O arquivo JSON deve conter um array de jogadores.', 'error');
+                return;
+              }
+              
+              // Validar estrutura dos jogadores
+              const validPlayers = importedData.filter(player => 
+                player.name && player.number !== undefined && player.teamId && player.category && player.position
+              );
+              
+              if (validPlayers.length === 0) {
+                showAlert('playersAlert', 'Nenhum jogador válido encontrado no arquivo.', 'error');
+                return;
+              }
+              
+              // Adicionar IDs aos jogadores importados se necessário
+              validPlayers.forEach(player => {
+                if (!player.id) {
+                  player.id = nextPlayerId++;
+                }
+              });
+              
+              // Adicionar jogadores à lista
+              players = [...players, ...validPlayers];
+              saveData('players');
+              updatePlayersList();
+              showAlert('playersAlert', `${validPlayers.length} jogador(es) importado(s) com sucesso!`, 'success');
+              break;
+              
+            case 'teams':
+              if (!Array.isArray(importedData)) {
+                showAlert('teamsAlert', 'O arquivo JSON deve conter um array de times.', 'error');
+                return;
+              }
+              
+              // Validar estrutura dos times
+              const validTeams = importedData.filter(team => 
+                team.id && team.name
+              );
+              
+              if (validTeams.length === 0) {
+                showAlert('teamsAlert', 'Nenhum time válido encontrado no arquivo.', 'error');
+                return;
+              }
+              
+              // Adicionar times à lista
+              teams = [...teams, ...validTeams];
+              saveData('teams');
+              updateTeamsList();
+              populateTeamSelects();
+              showAlert('teamsAlert', `${validTeams.length} time(s) importado(s) com sucesso!`, 'success');
+              break;
+              
+            case 'games':
+              if (!Array.isArray(importedData)) {
+                showAlert('gamesAlert', 'O arquivo JSON deve conter um array de jogos.', 'error');
+                return;
+              }
+              
+              // Validar estrutura dos jogos
+              const validGames = importedData.filter(game => 
+                game.date && game.time && game.category && game.homeTeam && game.awayTeam && game.location && game.status
+              );
+              
+              if (validGames.length === 0) {
+                showAlert('gamesAlert', 'Nenhum jogo válido encontrado no arquivo.', 'error');
+                return;
+              }
+              
+              // Adicionar IDs aos jogos importados se necessário
+              validGames.forEach(game => {
+                if (!game.id) {
+                  game.id = nextGameId++;
+                }
+              });
+              
+              // Adicionar jogos à lista
+              games = [...games, ...validGames];
+              saveData('games');
+              updateGamesList();
+              showAlert('gamesAlert', `${validGames.length} jogo(s) importado(s) com sucesso!`, 'success');
+              break;
+              
+            case 'standings':
+              if (typeof importedData !== 'object' || Array.isArray(importedData)) {
+                showAlert('standingsAlert', 'O arquivo JSON deve conter um objeto de classificação.', 'error');
+                return;
+              }
+              
+              standings = importedData;
+              saveData('standings');
+              displayStandings(document.getElementById('standingsCategory').value);
+              showAlert('standingsAlert', 'Classificação importada com sucesso!', 'success');
+              break;
+          }
+          
+          fileInput.value = '';
+          
+        } catch (error) {
+          showAlert(`${type}Alert`, 'Erro ao processar o arquivo JSON. Verifique o formato.', 'error');
+          console.error(error);
+        }
+      };
+      reader.readAsText(file);
+    }
+    
+    // Exportar JSON
+    function exportJSON(type) {
+      let data, fileName;
+      
+      switch(type) {
+        case 'players':
+          if (players.length === 0) {
+            showAlert('playersAlert', 'Nenhum jogador para exportar!', 'error');
+            return;
+          }
+          data = players;
+          fileName = 'jogadores.json';
+          break;
+        case 'teams':
+          if (teams.length === 0) {
+            showAlert('teamsAlert', 'Nenhum time para exportar!', 'error');
+            return;
+          }
+          data = teams;
+          fileName = 'times.json';
+          break;
+        case 'games':
+          if (games.length === 0) {
+            showAlert('gamesAlert', 'Nenhum jogo para exportar!', 'error');
+            return;
+          }
+          data = games;
+          fileName = 'jogos.json';
+          break;
+        case 'standings':
+          if (Object.keys(standings).length === 0) {
+            showAlert('standingsAlert', 'Nenhuma classificação para exportar!', 'error');
+            return;
+          }
+          data = standings;
+          fileName = 'classificacao.json';
+          break;
+      }
+      
+      const dataStr = JSON.stringify(data, null, 2);
+      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+      
+      const linkElement = document.createElement('a');
+      linkElement.setAttribute('href', dataUri);
+      linkElement.setAttribute('download', fileName);
+      linkElement.click();
+      
+      showAlert(`${type}Alert`, `Dados exportados com sucesso em ${fileName}!`, 'success');
+    }
+    
+    // Atualizar classificação
+    function updateStandings() {
+      const category = document.getElementById('standingsCategory').value;
+      
+      // Inicializar classificação para a categoria se não existir
+      if (!standings[category]) {
+        standings[category] = [];
+      }
+      
+      // Obter todos os times que jogam nesta categoria
+      const categoryTeams = new Set();
+      
+      // Adicionar times dos jogadores desta categoria
+      players
+        .filter(player => player.category === category)
+        .forEach(player => categoryTeams.add(player.teamId));
+      
+      // Adicionar times dos jogos desta categoria
+      games
+        .filter(game => game.category === category)
+        .forEach(game => {
+          categoryTeams.add(game.homeTeam);
+          categoryTeams.add(game.awayTeam);
+        });
+      
+      // Inicializar estatísticas para cada time
+      const teamStats = {};
+      categoryTeams.forEach(teamId => {
+        if (!teamStats[teamId]) {
+          teamStats[teamId] = {
+            teamId: teamId,
+            played: 0,
+            wins: 0,
+            losses: 0,
+            pointsFor: 0,
+            pointsAgainst: 0,
+            points: 0
+          };
+        }
+      });
+      
+      // Processar jogos concluídos desta categoria
+      games
+        .filter(game => game.category === category && game.status === 'completed')
+        .forEach(game => {
+          const homeTeam = game.homeTeam;
+          const awayTeam = game.awayTeam;
+          
+          // Atualizar estatísticas apenas se ambos os times estão na categoria
+          if (teamStats[homeTeam] && teamStats[awayTeam]) {
+            teamStats[homeTeam].played++;
+            teamStats[awayTeam].played++;
+            
+            teamStats[homeTeam].pointsFor += game.homeScore;
+            teamStats[homeTeam].pointsAgainst += game.awayScore;
+            
+            teamStats[awayTeam].pointsFor += game.awayScore;
+            teamStats[awayTeam].pointsAgainst += game.homeScore;
+            
+            if (game.homeScore > game.awayScore) {
+              teamStats[homeTeam].wins++;
+              teamStats[awayTeam].losses++;
+              teamStats[homeTeam].points += 2;
+            } else {
+              teamStats[awayTeam].wins++;
+              teamStats[homeTeam].losses++;
+              teamStats[awayTeam].points += 2;
+            }
+          }
+        });
+      
+      // Converter objeto em array e ordenar por pontos (e depois por vitórias)
+      standings[category] = Object.values(teamStats).sort((a, b) => {
+        if (b.points !== a.points) return b.points - a.points;
+        return b.wins - a.wins;
+      });
+      
+      saveData('standings');
+      displayStandings(category);
+      showAlert('standingsAlert', 'Classificação atualizada com sucesso!', 'success');
+    }
+    
+    // Exibir classificação
+    function displayStandings(category) {
+      const standingsTable = document.getElementById('standingsTable');
+      
+      if (!standings[category] || standings[category].length === 0) {
+        standingsTable.innerHTML = `
+          <tr>
+            <td colspan="8" style="text-align: center; padding: 20px; color: #7f8c8d;">
+              Nenhum dado de classificação disponível para ${category}.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+      
+      standingsTable.innerHTML = '';
+      
+      standings[category].forEach((team, index) => {
+        const teamInfo = teams.find(t => t.id === team.teamId) || { name: team.teamId };
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${teamInfo.name}</td>
+          <td>${team.played}</td>
+          <td>${team.wins}</td>
+          <td>${team.losses}</td>
+          <td>${team.pointsFor}</td>
+          <td>${team.pointsAgainst}</td>
+          <td>${team.points}</td>
+        `;
+        
+        standingsTable.appendChild(row);
+      });
+    }
+    
+    // Mostrar alerta
+    function showAlert(alertId, message, type) {
+      const alertBox = document.getElementById(alertId);
+      alertBox.textContent = message;
+      alertBox.className = `alert alert-${type}`;
+      alertBox.style.display = 'block';
+      
+      setTimeout(() => {
+        alertBox.style.display = 'none';
+      }, 3000);
+    }
+    
+    // Fechar modal clicando fora dele
+    window.onclick = function(event) {
+      const modals = document.querySelectorAll('.modal');
+      modals.forEach(modal => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    };
+  </script>
+</body>
+</html>

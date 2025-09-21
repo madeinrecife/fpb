@@ -104,7 +104,7 @@
     "position": "C",
     "photo": "https://www.panoz.it/fmitalia/Downloads/FM2023/Faccine_CutOut/cut_out_faces.png",
     "stats": {
-      "points": 34,
+      "points": 30,
       "rebounds": 22,
       "assists": 22,
       "steals": 2,
@@ -120,11 +120,12 @@
     "position": "C",
     "photo": "https://a.espncdn.com/combiner/i?img=/i/headshots/wnba/players/full/1017.png",
     "stats": {
-      "points": 34,
+      "points": 35,
       "rebounds": 16,
       "assists": 10,
       "steals": 3,
       "blocks": 12
     }
   }
+
 ]

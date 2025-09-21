@@ -88,6 +88,47 @@
       color: var(--accent);
     }
 
+    /* Menu de Times */
+    .teams-menu {
+      background: var(--primary-light);
+      padding: 0.8rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.9rem;
+    }
+
+    .team-filter-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .team-filter-btn.active {
+      background: var(--accent);
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    .team-filter-btn img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
     /* ======== Layout geral ======== */
     main { 
       padding: 2rem; 
@@ -121,6 +162,63 @@
     h2 { 
       color: var(--primary); 
       font-size: 1.8rem;
+    }
+
+    /* ======== Filtros ======== */
+    .filters-container {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .filter-group label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .filter-select {
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      font-family: 'Open Sans', sans-serif;
+      min-width: 180px;
+      cursor: pointer;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(13, 71, 161, 0.2);
+    }
+
+    .filter-button {
+      padding: 0.7rem 1.2rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s ease;
+      align-self: flex-end;
+    }
+
+    .filter-button:hover {
+      background: var(--primary-dark);
     }
 
     /* ======== Resumo inicial ======== */
@@ -501,6 +599,30 @@
         order: 1;
         margin-top: 1rem;
       }
+      
+      .filters-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .filter-group, .filter-button {
+        width: 100%;
+      }
+      
+      .teams-menu {
+        padding: 0.8rem 1rem;
+        gap: 0.5rem;
+      }
+      
+      .team-filter-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
+      
+      .team-filter-btn img {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     @media (max-width: 768px) {
@@ -536,6 +658,12 @@
       .standings-table th, 
       .standings-table td {
         padding: 0.7rem 0.5rem;
+      }
+      
+      .teams-menu {
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 0.5rem;
       }
     }
 
@@ -575,6 +703,9 @@
     </nav>
   </header>
 
+  <!-- Menu de Times -->
+  <div class="teams-menu" id="teamsMenu"></div>
+
   <main>
     <!-- Home -->
     <section id="home" class="page-section active">
@@ -594,6 +725,29 @@
       <div class="section-header">
         <h2>Estatísticas dos Jogadores</h2>
       </div>
+      
+      <div class="filters-container" id="statsFilters">
+        <div class="filter-group">
+          <label for="teamFilter">Filtrar por Time</label>
+          <select id="teamFilter" class="filter-select">
+            <option value="all">Todos os Times</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="categoryFilter">Ordenar por</label>
+          <select id="categoryFilter" class="filter-select">
+            <option value="points">Pontos (PPG)</option>
+            <option value="rebounds">Rebotes (RPG)</option>
+            <option value="assists">Assistências (APG)</option>
+            <option value="steals">Roubos (SPG)</option>
+            <option value="blocks">Tocos (BPG)</option>
+          </select>
+        </div>
+        
+        <button class="filter-button" id="applyStatsFilter">Aplicar Filtros</button>
+      </div>
+      
       <div id="playersGrid" class="players-grid"></div>
     </section>
 
@@ -627,6 +781,28 @@
       <div class="section-header">
         <h2>Jogos</h2>
       </div>
+      
+      <div class="filters-container" id="gamesFilters">
+        <div class="filter-group">
+          <label for="gamesTeamFilter">Filtrar por Time</label>
+          <select id="gamesTeamFilter" class="filter-select">
+            <option value="all">Todos os Times</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="statusFilter">Filtrar por Status</label>
+          <select id="statusFilter" class="filter-select">
+            <option value="all">Todos os Status</option>
+            <option value="completed">Finalizados</option>
+            <option value="live">Ao Vivo</option>
+            <option value="upcoming">Próximos</option>
+          </select>
+        </div>
+        
+        <button class="filter-button" id="applyGamesFilter">Aplicar Filtros</button>
+      </div>
+      
       <div class="games-container" id="gamesList"></div>
     </section>
   </main>
@@ -640,6 +816,7 @@
     let games = [];
     let standings = {};
     let peTeams = [];
+    let currentTeamFilter = "all";
 
     async function loadData() {
       try {
@@ -667,6 +844,8 @@
         renderFeaturedPlayers();
         renderStandings();
         renderGames();
+        populateFilterOptions();
+        renderTeamsMenu();
       } catch (err) {
         console.error("Erro ao carregar dados JSON:", err);
         document.getElementById("summaryCards").innerHTML = `
@@ -679,16 +858,100 @@
       }
     }
 
-    function renderPlayers() {
+    function populateFilterOptions() {
+      // Popular filtro de times para estatísticas
+      const teamFilter = document.getElementById("teamFilter");
+      const gamesTeamFilter = document.getElementById("gamesTeamFilter");
+      
+      // Limpar opções existentes (exceto a primeira)
+      while (teamFilter.options.length > 1) teamFilter.remove(1);
+      while (gamesTeamFilter.options.length > 1) gamesTeamFilter.remove(1);
+      
+      // Adicionar times (sem duplicatas)
+      const uniqueTeams = peTeams.filter((team, index, self) => 
+        index === self.findIndex(t => t.id === team.id)
+      );
+      
+      uniqueTeams.forEach(team => {
+        const option = document.createElement("option");
+        option.value = team.id;
+        option.textContent = team.name;
+        
+        teamFilter.appendChild(option.cloneNode(true));
+        gamesTeamFilter.appendChild(option);
+      });
+    }
+
+    function renderTeamsMenu() {
+      const menu = document.getElementById("teamsMenu");
+      menu.innerHTML = "";
+      
+      // Adicionar botão para todos os times
+      const allTeamsBtn = document.createElement("button");
+      allTeamsBtn.className = `team-filter-btn ${currentTeamFilter === "all" ? "active" : ""}`;
+      allTeamsBtn.innerHTML = `<i class="fas fa-basketball-ball"></i> Todos os Times`;
+      allTeamsBtn.addEventListener("click", () => {
+        setTeamFilter("all");
+      });
+      menu.appendChild(allTeamsBtn);
+      
+      // Adicionar botões para cada time (sem duplicatas)
+      const uniqueTeams = peTeams.filter((team, index, self) => 
+        index === self.findIndex(t => t.id === team.id)
+      );
+      
+      uniqueTeams.forEach(team => {
+        const teamBtn = document.createElement("button");
+        teamBtn.className = `team-filter-btn ${currentTeamFilter === team.id ? "active" : ""}`;
+        teamBtn.innerHTML = `
+          <img src="${team.logo || 'https://placehold.co/60x60'}" alt="${team.name}">
+          ${team.name}
+        `;
+        teamBtn.addEventListener("click", () => {
+          setTeamFilter(team.id);
+        });
+        menu.appendChild(teamBtn);
+      });
+    }
+
+    function setTeamFilter(teamId) {
+      currentTeamFilter = teamId;
+      
+      // Atualizar menu de times
+      document.querySelectorAll(".team-filter-btn").forEach(btn => {
+        btn.classList.remove("active");
+      });
+      
+      if (teamId === "all") {
+        document.querySelectorAll(".team-filter-btn")[0].classList.add("active");
+      } else {
+        const teamBtn = Array.from(document.querySelectorAll(".team-filter-btn")).find(btn => 
+          btn.textContent.includes(peTeams.find(t => t.id === teamId)?.name || "")
+        );
+        if (teamBtn) teamBtn.classList.add("active");
+      }
+      
+      // Atualizar selects
+      document.getElementById("teamFilter").value = teamId;
+      document.getElementById("gamesTeamFilter").value = teamId;
+      
+      // Aplicar filtros automaticamente
+      filterPlayers();
+      filterGames();
+    }
+
+    function renderPlayers(filteredPlayers = null) {
       const grid = document.getElementById("playersGrid");
       grid.innerHTML = "";
       
-      if (players.length === 0) {
-        grid.innerHTML = `<p>Nenhum jogador encontrado. Verifique o arquivo players.json</p>`;
+      const playersToRender = filteredPlayers || players;
+      
+      if (playersToRender.length === 0) {
+        grid.innerHTML = `<p class="no-results">Nenhum jogador encontrado com os filtros aplicados.</p>`;
         return;
       }
       
-      players.forEach(p => {
+      playersToRender.forEach(p => {
         const team = peTeams.find(t => t.id === p.teamId) || {};
         grid.innerHTML += `
           <div class="player-card">
@@ -709,6 +972,99 @@
             </table>
           </div>`;
       });
+    }
+
+    function filterPlayers() {
+      const teamId = document.getElementById("teamFilter").value;
+      const category = document.getElementById("categoryFilter").value;
+      
+      let filteredPlayers = [...players];
+      
+      // Filtrar por time
+      if (teamId !== "all") {
+        filteredPlayers = filteredPlayers.filter(player => player.teamId === teamId);
+      }
+      
+      // Ordenar por categoria
+      filteredPlayers.sort((a, b) => b.stats[category] - a.stats[category]);
+      
+      renderPlayers(filteredPlayers);
+    }
+
+    function renderGames(filteredGames = null) {
+      const list = document.getElementById("gamesList");
+      list.innerHTML = "";
+      
+      const gamesToRender = filteredGames || games;
+      
+      if (gamesToRender.length === 0) {
+        list.innerHTML = `<p class="no-results">Nenhum jogo encontrado com os filtros aplicados.</p>`;
+        return;
+      }
+      
+      gamesToRender.forEach(g => {
+        const home = peTeams.find(t=>t.id===g.homeTeam) || {};
+        const away = peTeams.find(t=>t.id===g.awayTeam) || {};
+        const statusClass = g.status === "completed" ? "completed" : 
+                           g.status === "live" ? "live" : "upcoming";
+        const statusText = g.status === "completed" ? "Finalizado" : 
+                          g.status === "live" ? "Ao Vivo" : "Em Breve";
+        
+        list.innerHTML += `
+          <div class="game-card">
+            <div class="game-team">
+              <div class="game-logo-container">
+                <img src="${home.logo || 'https://placehold.co/60x60'}" class="game-logo" alt="${home.name}">
+              </div>
+              <strong>${home.name || g.homeTeam}</strong>
+            </div>
+            
+            <div class="game-info">
+              <p>${g.date} ${g.time}</p>
+              ${g.status === "completed" ? 
+                `<p class="game-score">${g.homeScore} - ${g.awayScore}</p>` : 
+                `<p class="game-score">VS</p>`
+              }
+              <p>${g.location}</p>
+              <span class="game-status ${statusClass}">${statusText}</span>
+              ${g.youtube ? `
+                <div class="game-youtube">
+                  <a href="${g.youtube}" target="_blank" class="btn">
+                    <i class="fab fa-youtube"></i> Assistir
+                  </a>
+                </div>
+              ` : ""}
+            </div>
+            
+            <div class="game-team">
+              <div class="game-logo-container">
+                <img src="${away.logo || 'https://placehold.co/60x60'}" class="game-logo" alt="${away.name}">
+              </div>
+              <strong>${away.name || g.awayTeam}</strong>
+            </div>
+          </div>`;
+      });
+    }
+
+    function filterGames() {
+      const teamId = document.getElementById("gamesTeamFilter").value;
+      const status = document.getElementById("statusFilter").value;
+      
+      let filteredGames = [...games];
+      
+      // Filtrar por time
+      if (teamId !== "all") {
+        filteredGames = filteredGames.filter(game => 
+          game.homeTeam === teamId || game.awayTeam === teamId
+        );
+      }
+      
+      // Filtrar por status
+      if (status !== "all") {
+        filteredGames = filteredGames.filter(game => game.status === status);
+      }
+      
+      renderGames(filteredGames);
     }
 
     function renderFeaturedPlayers() {
@@ -767,59 +1123,6 @@
             <td>${saldo > 0 ? '+' : ''}${saldo}</td>
             <td><strong>${s.points}</strong></td>
           </tr>`;
-      });
-    }
-
-    function renderGames() {
-      const list = document.getElementById("gamesList");
-      list.innerHTML = "";
-      
-      if (games.length === 0) {
-        list.innerHTML = `<p>Nenhum jogo encontrado. Verifique o arquivo games.json</p>`;
-        return;
-      }
-      
-      games.forEach(g => {
-        const home = peTeams.find(t=>t.id===g.homeTeam) || {};
-        const away = peTeams.find(t=>t.id===g.awayTeam) || {};
-        const statusClass = g.status === "completed" ? "completed" : 
-                           g.status === "live" ? "live" : "upcoming";
-        const statusText = g.status === "completed" ? "Finalizado" : 
-                          g.status === "live" ? "Ao Vivo" : "Em Breve";
-        
-        list.innerHTML += `
-          <div class="game-card">
-            <div class="game-team">
-              <div class="game-logo-container">
-                <img src="${home.logo || 'https://placehold.co/60x60'}" class="game-logo" alt="${home.name}">
-              </div>
-              <strong>${home.name || g.homeTeam}</strong>
-            </div>
-            
-            <div class="game-info">
-              <p>${g.date} ${g.time}</p>
-              ${g.status === "completed" ? 
-                `<p class="game-score">${g.homeScore} - ${g.awayScore}</p>` : 
-                `<p class="game-score">VS</p>`
-              }
-              <p>${g.location}</p>
-              <span class="game-status ${statusClass}">${statusText}</span>
-              ${g.youtube ? `
-                <div class="game-youtube">
-                  <a href="${g.youtube}" target="_blank" class="btn">
-                    <i class="fab fa-youtube"></i> Assistir
-                  </a>
-                </div>
-              ` : ""}
-            </div>
-            
-            <div class="game-team">
-              <div class="game-logo-container">
-                <img src="${away.logo || 'https://placehold.co/60x60'}" class="game-logo" alt="${away.name}">
-              </div>
-              <strong>${away.name || g.awayTeam}</strong>
-            </div>
-          </div>`;
       });
     }
 
@@ -883,9 +1186,34 @@
       });
     }
 
+    function setupFilters() {
+      // Configurar filtros de estatísticas
+      document.getElementById("applyStatsFilter").addEventListener("click", filterPlayers);
+      
+      // Configurar filtros de jogos
+      document.getElementById("applyGamesFilter").addEventListener("click", filterGames);
+      
+      // Configurar mudanças nos selects para aplicar automaticamente
+      document.getElementById("teamFilter").addEventListener("change", function() {
+        currentTeamFilter = this.value;
+        renderTeamsMenu();
+        filterPlayers();
+      });
+      
+      document.getElementById("gamesTeamFilter").addEventListener("change", function() {
+        currentTeamFilter = this.value;
+        renderTeamsMenu();
+        filterGames();
+      });
+      
+      document.getElementById("categoryFilter").addEventListener("change", filterPlayers);
+      document.getElementById("statusFilter").addEventListener("change", filterGames);
+    }
+
     document.addEventListener("DOMContentLoaded", () => { 
       loadData(); 
       setupNavigation(); 
+      setupFilters();
     });
   </script>
 </body>

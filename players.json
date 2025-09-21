@@ -96,19 +96,19 @@
     }
   },
   {
-    "id": 8,
-    "name": "Marlus Filho",
-    "number": 47,
+    "id": 7,
+    "name": "Mersi",
+    "number": 11,
     "teamId": "sparta-pe",
     "category": "ADULTO",
     "position": "C",
-    "photo": "https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/614.png",
+    "photo": "https://www.panoz.it/fmitalia/Downloads/FM2023/Faccine_CutOut/cut_out_faces.png",
     "stats": {
-      "points": 29,
-      "rebounds": 12,
-      "assists": 23,
-      "steals": 3,
-      "blocks": 5
+      "points": 34,
+      "rebounds": 22,
+      "assists": 22,
+      "steals": 2,
+      "blocks": 2
     }
   }
 ]

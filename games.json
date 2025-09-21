@@ -10,7 +10,7 @@
     "awayScore": 78,
     "location": "Ginásio do Sport",
     "status": "completed",
-    "youtube": "https://www.youtube.com/watch?v=abc123",
+    "youtube": "https://www.youtube.com/watch?v=abc123"
   },
   {
     "id": 2,
@@ -23,7 +23,7 @@
     "awayScore": 88,
     "location": "Arena de Santa Cruz",
     "status": "completed",
-    "youtube": "https://www.youtube.com/watch?v=def456",
+    "youtube": "https://www.youtube.com/watch?v=def456"
   },
   {
     "id": 3,
@@ -36,7 +36,7 @@
     "awayScore": 134,
     "location": "Ginásio do Náutico",
     "status": "completed",
-    "youtube": null,
+    "youtube": null
   },
   {
     "id": 4,
@@ -49,7 +49,7 @@
     "awayScore": 88,
     "location": "Ginásio do Sport",
     "status": "completed",
-    "youtube": null,
+    "youtube": null
   },
   {
     "id": 5,
@@ -62,7 +62,7 @@
     "status": "completed",
     "youtube": null,
     "homeScore": 146,
-    "awayScore": 56,
+    "awayScore": 56
   },
   {
     "id": 6,
@@ -75,6 +75,6 @@
     "status": "completed",
     "youtube": null,
     "homeScore": 120,
-    "awayScore": 40,
+    "awayScore": 40
   }
 ]

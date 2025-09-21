@@ -1,7 +1,7 @@
 [
   {
     "id": "sport",
-    "name": "Sport Recife",
+    "name": "Sport",
     "logo": "https://sportrecife.com.br/wp-content/uploads/2024/06/image19.png",
     "color": "#050000"
   },
@@ -19,23 +19,23 @@
   },
   {
     "id": "dino",
-    "name": "Dino Basquete",
+    "name": "Dino",
     "logo": "https://blogger.googleusercontent.com/img/a/AVvXsEgY3ec6pVg0Qib8BMvodjDynOkTuResrkisrcI0ZKZcyVibG2r1OtkG3Iuj1p8Unc-7Oklu4y16Ifpm4q_MHUJmxkFb1jkYLJTnnmn4qgLeqZMxkSHDiTsK-SS8h5MJ8OJx_lRQg8HhjYAT5W8bMgfXI3fVLP3tyBvH0GNJJOyHfbXw0aflvGtjIWjyhfHe",
     "color": "#87007e"
   },
   {
     "id": "mandacaru",
-    "name": "Mandacaru Basquete",
+    "name": "Mandacaru",
     "logo": "https://blogger.googleusercontent.com/img/a/AVvXsEgAr8SYU7vcWgHAUv2RMIBfWbZwhmQbGtPip9sosyGiaumpag3cWhOgBrsTmTg57LIhEEtGAv-sb11p5VFaGsYleOi8a5dvnMDV40CI4hPYbJURlU266iopQdCabQFS5oKKcgAQnfaeYStZJHIBFWJn1UKmJ-f9JVcjAk5FfrqZtW32nyYFm-5HIudo2NXq",
     "color": "#008702"
   },
   {
     "id": "aadb",
-    "name": "AADB Basquete",
+    "name": "AADB",
     "logo": "https://blogger.googleusercontent.com/img/a/AVvXsEihZQRjVA-PfdDukxdizQmioC1PVy0Twr_aEPYBSi36z-DyXw5lhlaTI6hHCDHOVmHi5dLvFSia51AYSlFZ3QztC1nDDqPomc2Xw4uVMAbVPOGAZDvsFpzYX3hdtP58-8iNR-KM8jCCX0GXopHPXDOmd_Z1X9iHd31bJONE7VwY0EofzSRBEX2UAufOR-cR",
     "color": "#1600d9"
   },
-   {
+  {
     "id": "aquarios",
     "name": "aquarios",
     "logo": "https://projetoaquarius.com/wp-content/uploads/2023/11/cropped-logo-aquarius-novo.png",

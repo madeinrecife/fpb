@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "date": "2023-10-15",
+    "time": "19:00",
+    "category": "adulto",
+    "homeTeam": "sport",
+    "awayTeam": "nautico",
+    "homeScore": 85,
+    "awayScore": 78,
+    "location": "Ginásio do Sport",
+    "status": "completed",
+    "youtube": "https://www.youtube.com/watch?v=abc123"
+  },
+  {
+    "id": 2,
+    "date": "2023-10-16",
+    "time": "20:00",
+    "category": "ADULTO",
+    "homeTeam": "santa-cruz",
+    "awayTeam": "dino",
+    "homeScore": 92,
+    "awayScore": 88,
+    "location": "Arena de Santa Cruz",
+    "status": "completed",
+    "youtube": "https://www.youtube.com/watch?v=def456"
+  },
+  {
+    "id": 3,
+    "date": "2023-10-22",
+    "time": "16:00",
+    "category": "ADULTO",
+    "homeTeam": "nautico",
+    "awayTeam": "santa-cruz",
+    "homeScore": 88,
+    "awayScore": 134,
+    "location": "Ginásio do Náutico",
+    "status": "completed",
+    "youtube": null
+  },
+  {
+    "id": 4,
+    "date": "2023-10-23",
+    "time": "18:00",
+    "category": "ADULTO",
+    "homeTeam": "sport",
+    "awayTeam": "aadb",
+    "homeScore": 67,
+    "awayScore": 88,
+    "location": "Ginásio do Sport",
+    "status": "completed",
+    "youtube": null
+  },
+  {
+    "id": 5,
+    "date": "2025-09-02",
+    "time": "16:30",
+    "category": "ADULTO",
+    "homeTeam": "sparta-pe",
+    "awayTeam": "mandacaru",
+    "location": "Geraldão",
+    "status": "completed",
+    "youtube": null,
+    "homeScore": 146,
+    "awayScore": 56
+  },
+  {
+    "id": 6,
+    "date": "2025-09-02",
+    "time": "18:50",
+    "category": "ADULTO",
+    "homeTeam": "sparta-pe",
+    "awayTeam": "santa-cruz",
+    "location": "IBURA",
+    "status": "completed",
+    "youtube": null,
+    "homeScore": 120,
+    "awayScore": 40
+  }
+]

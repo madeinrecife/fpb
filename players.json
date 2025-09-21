@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "name": "Deus Jesus",
+    "number": 10,
+    "teamId": "sport",
+    "category": "adulto",
+    "position": "PG",
+    "photo": "https://randomuser.me/api/portraits/men/32.jpg",
+    "stats": {
+      "points": 29.5,
+      "rebounds": 3.2,
+      "assists": 7.8,
+      "steals": 1.9,
+      "blocks": 0.2
+    }
+  },
+  {
+    "id": 2,
+    "name": "Carlos Lins",
+    "number": 23,
+    "teamId": "nautico",
+    "category": "ADULTO",
+    "position": "SF",
+    "photo": "https://randomuser.me/api/portraits/men/22.jpg",
+    "stats": {
+      "points": 30,
+      "rebounds": 6.7,
+      "assists": 3.5,
+      "steals": 1.2,
+      "blocks": 0.5
+    }
+  },
+  {
+    "id": 3,
+    "name": "Pedro Oliveira",
+    "number": 34,
+    "teamId": "santa-cruz",
+    "category": "adulto",
+    "position": "PF",
+    "photo": "https://randomuser.me/api/portraits/men/45.jpg",
+    "stats": {
+      "points": 16.8,
+      "rebounds": 9.2,
+      "assists": 2.1,
+      "steals": 0.8,
+      "blocks": 1.7
+    }
+  },
+  {
+    "id": 4,
+    "name": "Lucas Mendes",
+    "number": 15,
+    "teamId": "dino",
+    "category": "sub19",
+    "position": "C",
+    "photo": "https://randomuser.me/api/portraits/men/67.jpg",
+    "stats": {
+      "points": 12.4,
+      "rebounds": 11.5,
+      "assists": 1.8,
+      "steals": 0.5,
+      "blocks": 2.3
+    }
+  },
+  {
+    "id": 5,
+    "name": "Ana Costa",
+    "number": 7,
+    "teamId": "mandacaru",
+    "category": "sub17",
+    "position": "SG",
+    "photo": "https://randomuser.me/api/portraits/women/23.jpg",
+    "stats": {
+      "points": 20.1,
+      "rebounds": 4.2,
+      "assists": 4,
+      "steals": 2.1,
+      "blocks": 0.3
+    }
+  },
+  {
+    "id": 6,
+    "name": "Mariana Alves",
+    "number": 9,
+    "teamId": "aadb",
+    "category": "sub15",
+    "position": "PG",
+    "photo": "https://randomuser.me/api/portraits/women/45.jpg",
+    "stats": {
+      "points": 14.7,
+      "rebounds": 2.8,
+      "assists": 6.3,
+      "steals": 2.5,
+      "blocks": 0.1
+    }
+  },
+  {
+    "id": 7,
+    "name": "Mersi",
+    "number": 11,
+    "teamId": "sparta-pe",
+    "category": "ADULTO",
+    "position": "C",
+    "photo": "https://www.panoz.it/fmitalia/Downloads/FM2023/Faccine_CutOut/cut_out_faces.png",
+    "stats": {
+      "points": 34,
+      "rebounds": 22,
+      "assists": 22,
+      "steals": 2,
+      "blocks": 2
+    }
+  }
+]

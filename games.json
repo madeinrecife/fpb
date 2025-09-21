@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "homeTeam": "sport",
+  "awayTeam": "nacional",
+  "date": "15/03/2025",
+  "time": "20:00",
+  "location": "Ginásio do Sport",
+  "status": "completed",
+  "homeScore": 85,
+  "awayScore": 78,
+  "youtube": "https://youtube.com"
+}

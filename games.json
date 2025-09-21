@@ -11,7 +11,6 @@
     "location": "Ginásio do Sport",
     "status": "completed",
     "youtube": "https://www.youtube.com/watch?v=abc123",
-    "sumula": "https://exemplo.com/sumulas/sport_x_nautico.pdf"
   },
   {
     "id": 2,
@@ -25,7 +24,6 @@
     "location": "Arena de Santa Cruz",
     "status": "completed",
     "youtube": "https://www.youtube.com/watch?v=def456",
-    "sumula": "https://exemplo.com/sumulas/santacruz_x_dino.pdf"
   },
   {
     "id": 3,
@@ -39,7 +37,6 @@
     "location": "Ginásio do Náutico",
     "status": "completed",
     "youtube": null,
-    "sumula": "https://exemplo.com/sumulas/nautico_x_santacruz.pdf"
   },
   {
     "id": 4,
@@ -53,7 +50,6 @@
     "location": "Ginásio do Sport",
     "status": "completed",
     "youtube": null,
-    "sumula": "https://desenhopracolorir.com.br/pdfs/desenhos-para-colorir-infantil-pdf.pdf"
   },
   {
     "id": 5,
@@ -67,7 +63,6 @@
     "youtube": null,
     "homeScore": 146,
     "awayScore": 56,
-    "sumula": "https://desenhopracolorir.com.br/pdfs/desenhos-para-colorir-infantil-pdf.pdf"
   },
   {
     "id": 6,
@@ -81,6 +76,5 @@
     "youtube": null,
     "homeScore": 120,
     "awayScore": 40,
-    "sumula": "https://desenhopracolorir.com.br/pdfs/desenhos-para-colorir-infantil-pdf.pdf"
   }
 ]

@@ -3,14 +3,15 @@
     "id": 1,
     "date": "2023-10-15",
     "time": "19:00",
-    "category": "adulto",
+    "category": "ADULTO",
     "homeTeam": "sport",
     "awayTeam": "nautico",
     "homeScore": 85,
     "awayScore": 78,
     "location": "Ginásio do Sport",
     "status": "completed",
-    "youtube": "https://www.youtube.com/watch?v=abc123"
+    "youtube": "https://www.youtube.com/watch?v=abc123",
+    "sumula": "https://drive.google.com/file/d/1sKRsXwVaT1d346AR-ibu__pbnoxgrnIR/view?usp=sharing"
   },
   {
     "id": 2,
@@ -23,7 +24,8 @@
     "awayScore": 88,
     "location": "Arena de Santa Cruz",
     "status": "completed",
-    "youtube": "https://www.youtube.com/watch?v=def456"
+    "youtube": "https://www.youtube.com/watch?v=def456",
+    "sumula": "https://drive.google.com/file/d/1sKRsXwVaT1d346AR-ibu__pbnoxgrnIR/view?usp=sharing"
   },
   {
     "id": 3,
@@ -60,9 +62,10 @@
     "awayTeam": "mandacaru",
     "location": "Geraldão",
     "status": "completed",
-    "youtube": null,
+    "youtube": "https://www.youtube.com/watch?v=Mi2P9y9_93Y&t=17351s",
     "homeScore": 146,
-    "awayScore": 56
+    "awayScore": 56,
+    "sumula": "https://drive.google.com/file/d/1KCz-Q6g0KoDtfvWpNtmRfurdAUh9HqjR/view?usp=drive_link"
   },
   {
     "id": 6,

@@ -1,5 +1,14 @@
 {
-  "adulto": [
+  "ADULTO": [
+    {
+      "teamId": "santa-cruz",
+      "played": 3,
+      "wins": 2,
+      "losses": 1,
+      "pointsFor": 266,
+      "pointsAgainst": 296,
+      "points": 4
+    },
     {
       "teamId": "sparta-pe",
       "played": 2,
@@ -10,13 +19,13 @@
       "points": 4
     },
     {
-      "teamId": "santa-cruz",
-      "played": 3,
-      "wins": 2,
+      "teamId": "sport",
+      "played": 2,
+      "wins": 1,
       "losses": 1,
-      "pointsFor": 266,
-      "pointsAgainst": 296,
-      "points": 4
+      "pointsFor": 152,
+      "pointsAgainst": 166,
+      "points": 2
     },
     {
       "teamId": "aadb",
@@ -29,11 +38,11 @@
     },
     {
       "teamId": "nautico",
-      "played": 1,
+      "played": 2,
       "wins": 0,
-      "losses": 1,
-      "pointsFor": 88,
-      "pointsAgainst": 134,
+      "losses": 2,
+      "pointsFor": 166,
+      "pointsAgainst": 219,
       "points": 0
     },
     {
@@ -43,15 +52,6 @@
       "losses": 1,
       "pointsFor": 88,
       "pointsAgainst": 92,
-      "points": 0
-    },
-    {
-      "teamId": "sport",
-      "played": 1,
-      "wins": 0,
-      "losses": 1,
-      "pointsFor": 67,
-      "pointsAgainst": 88,
       "points": 0
     },
     {

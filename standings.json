@@ -1,6 +1,15 @@
 {
   "adulto": [
     {
+      "teamId": "sparta-pe",
+      "played": 3,
+      "wins": 3,
+      "losses": 0,
+      "pointsFor": 406,
+      "pointsAgainst": 163,
+      "points": 6
+    },
+    {
       "teamId": "santa-cruz",
       "played": 3,
       "wins": 2,
@@ -8,24 +17,6 @@
       "pointsFor": 266,
       "pointsAgainst": 296,
       "points": 4
-    },
-    {
-      "teamId": "sparta-pe",
-      "played": 2,
-      "wins": 2,
-      "losses": 0,
-      "pointsFor": 266,
-      "pointsAgainst": 96,
-      "points": 4
-    },
-    {
-      "teamId": "sport",
-      "played": 2,
-      "wins": 1,
-      "losses": 1,
-      "pointsFor": 152,
-      "pointsAgainst": 166,
-      "points": 2
     },
     {
       "teamId": "aadb",
@@ -37,6 +28,24 @@
       "points": 2
     },
     {
+      "teamId": "sport",
+      "played": 2,
+      "wins": 1,
+      "losses": 1,
+      "pointsFor": 152,
+      "pointsAgainst": 166,
+      "points": 2
+    },
+    {
+      "teamId": "dino",
+      "played": 1,
+      "wins": 0,
+      "losses": 1,
+      "pointsFor": 88,
+      "pointsAgainst": 92,
+      "points": 0
+    },
+    {
       "teamId": "nautico",
       "played": 2,
       "wins": 0,
@@ -46,12 +55,12 @@
       "points": 0
     },
     {
-      "teamId": "dino",
+      "teamId": "aquarios",
       "played": 1,
       "wins": 0,
       "losses": 1,
-      "pointsFor": 88,
-      "pointsAgainst": 92,
+      "pointsFor": 67,
+      "pointsAgainst": 140,
       "points": 0
     },
     {

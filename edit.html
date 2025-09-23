@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistema de Gestão de Basquete</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Estilos Gerais */
     * {
@@ -14,11 +15,11 @@
     
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 100%);
       margin: 0;
       padding: 20px;
       min-height: 100vh;
-      color: #333;
+      color: #ecf0f1;
     }
     
     .container {
@@ -29,34 +30,35 @@
     h1 {
       text-align: center;
       margin: 20px 0;
-      color: #2c3e50;
+      color: #3498db;
       font-size: 2.5rem;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
     
     /* Abas */
     .tabs {
       display: flex;
       margin-bottom: 20px;
-      background: white;
+      background: #34495e;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
     
     .tab-button {
       padding: 15px 25px;
-      background: #f8f9fa;
+      background: #2c3e50;
       border: none;
       flex: 1;
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
       transition: background 0.3s, transform 0.2s;
+      color: #ecf0f1;
     }
     
     .tab-button:hover {
-      background: #e9ecef;
+      background: #3498db;
       transform: translateY(-2px);
     }
     
@@ -68,10 +70,10 @@
     
     .tab-content {
       display: none;
-      background: white;
+      background: #2c3e50;
       padding: 25px;
       border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       animation: fadeIn 0.5s ease;
     }
     
@@ -118,16 +120,18 @@
       display: block;
       margin-bottom: 5px;
       font-weight: 600;
-      color: #2c3e50;
+      color: #ecf0f1;
     }
     
     input, select, textarea {
       width: 100%;
       padding: 12px;
-      border: 2px solid #ddd;
+      border: 2px solid #34495e;
       border-radius: 8px;
       font-size: 1rem;
       transition: border-color 0.3s;
+      background: #34495e;
+      color: #ecf0f1;
     }
     
     input:focus, select:focus, textarea:focus {
@@ -204,11 +208,14 @@
     .list-section {
       max-height: 70vh;
       overflow-y: auto;
+      background: #34495e;
+      padding: 15px;
+      border-radius: 10px;
     }
     
     .list-item {
       padding: 15px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #2c3e50;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -216,7 +223,7 @@
     }
     
     .list-item:hover {
-      background: #f9f9f9;
+      background: #3c5064;
     }
     
     .item-info {
@@ -225,12 +232,12 @@
     
     .item-name {
       font-weight: 600;
-      color: #2c3e50;
+      color: #ecf0f1;
     }
     
     .item-details {
       font-size: 0.9rem;
-      color: #7f8c8d;
+      color: #bdc3c7;
       margin-top: 5px;
     }
     
@@ -251,7 +258,7 @@
       gap: 15px;
       margin-top: 20px;
       padding-top: 20px;
-      border-top: 2px dashed #ddd;
+      border-top: 2px dashed #34495e;
     }
     
     .stats-title {
@@ -271,15 +278,13 @@
     }
     
     .alert-success {
-      background: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
+      background: #27ae60;
+      color: white;
     }
     
     .alert-error {
-      background: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
+      background: #e74c3c;
+      color: white;
     }
     
     /* Contador */
@@ -304,7 +309,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.7);
       z-index: 1000;
       justify-content: center;
       align-items: center;
@@ -312,14 +317,14 @@
     }
     
     .modal-content {
-      background: white;
+      background: #2c3e50;
       padding: 30px;
       border-radius: 15px;
       width: 90%;
       max-width: 600px;
       max-height: 90vh;
       overflow-y: auto;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
     
     .modal-header {
@@ -333,24 +338,24 @@
     
     .modal-title {
       font-size: 1.5rem;
-      color: #2c3e50;
+      color: #ecf0f1;
     }
     
     .close {
       font-size: 1.5rem;
       cursor: pointer;
-      color: #7f8c8d;
+      color: #bdc3c7;
     }
     
     .close:hover {
-      color: #34495e;
+      color: #ecf0f1;
     }
     
     /* Importar/Exportar */
     .import-export-section {
       margin-top: 20px;
       padding-top: 20px;
-      border-top: 2px dashed #ddd;
+      border-top: 2px dashed #34495e;
     }
     
     .file-input {
@@ -360,8 +365,8 @@
     .file-label {
       display: block;
       padding: 12px;
-      background: #f8f9fa;
-      border: 2px dashed #ddd;
+      background: #34495e;
+      border: 2px dashed #3498db;
       border-radius: 8px;
       text-align: center;
       cursor: pointer;
@@ -370,7 +375,8 @@
     }
     
     .file-label:hover {
-      border-color: #3498db;
+      border-color: #2980b9;
+      background: #3c5064;
     }
     
     /* Tabela de Classificação */
@@ -384,7 +390,7 @@
     .standings-table td {
       padding: 12px;
       text-align: center;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #34495e;
     }
     
     .standings-table th {
@@ -393,11 +399,11 @@
     }
     
     .standings-table tr:nth-child(even) {
-      background-color: #f2f2f2;
+      background-color: #34495e;
     }
     
     .standings-table tr:hover {
-      background-color: #e9ecef;
+      background-color: #3c5064;
     }
     
     /* Botões de ação */
@@ -416,7 +422,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Sistema de Gestão de Basquete</h1>
+    <h1><i class="fas fa-basketball-ball"></i> Sistema de Gestão de Basquete</h1>
     
     <div class="tabs">
       <button class="tab-button active" data-tab="players">Jogadores</button>
@@ -457,13 +463,13 @@
               <label for="playerCategory">Categoria:</label>
               <select id="playerCategory" required>
                 <option value="">Selecione</option>
-                <option value="SUB9">SUB9</option>
-                <option value="SUB11">SUB11</option>
-                <option value="SUB13">SUB13</option>
-                <option value="SUB15">SUB15</option>
-                <option value="SUB17">SUB17</option>
-                <option value="SUB19">SUB19</option>
-                <option value="ADULTO">ADULTO</option>
+                <option value="sub9">SUB9</option>
+                <option value="sub11">SUB11</option>
+                <option value="sub13">SUB13</option>
+                <option value="sub15">SUB15</option>
+                <option value="sub17">SUB17</option>
+                <option value="sub19">SUB19</option>
+                <option value="adulto">ADULTO</option>
               </select>
             </div>
             
@@ -522,7 +528,6 @@
             <div class="action-buttons">
               <button id="importPlayersBtn" class="btn btn-warning">Importar JSON</button>
               <button id="exportPlayersBtn" class="btn btn-success">Exportar Jogadores</button>
-              <button id="clearPlayersBtn" class="btn btn-secondary">Limpar Jogadores</button>
             </div>
           </div>
         </div>
@@ -531,7 +536,7 @@
           <h2 class="form-title">Jogadores Cadastrados <span id="playersCount" class="counter">0</span></h2>
           
           <div id="playersList">
-            <p style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum jogador cadastrado ainda.</p>
+            <p style="text-align: center; padding: 20px; color: #bdc3c7;">Nenhum jogador cadastrado ainda.</p>
           </div>
         </div>
       </div>
@@ -573,7 +578,6 @@
             <div class="action-buttons">
               <button id="importTeamsBtn" class="btn btn-warning">Importar JSON</button>
               <button id="exportTeamsBtn" class="btn btn-success">Exportar Times</button>
-              <button id="clearTeamsBtn" class="btn btn-secondary">Limpar Times</button>
             </div>
           </div>
         </div>
@@ -582,7 +586,7 @@
           <h2 class="form-title">Times Cadastrados <span id="teamsCount" class="counter">0</span></h2>
           
           <div id="teamsList">
-            <p style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum time cadastrado ainda.</p>
+            <p style="text-align: center; padding: 20px; color: #bdc3c7;">Nenhum time cadastrado ainda.</p>
           </div>
         </div>
       </div>
@@ -613,13 +617,13 @@
               <label for="gameCategory">Categoria:</label>
               <select id="gameCategory" required>
                 <option value="">Selecione</option>
-                <option value="SUB9">SUB9</option>
-                <option value="SUB11">SUB11</option>
-                <option value="SUB13">SUB13</option>
-                <option value="SUB15">SUB15</option>
-                <option value="SUB17">SUB17</option>
-                <option value="SUB19">SUB19</option>
-                <option value="ADULTO">ADULTO</option>
+                <option value="sub9">SUB9</option>
+                <option value="sub11">SUB11</option>
+                <option value="sub13">SUB13</option>
+                <option value="sub15">SUB15</option>
+                <option value="sub17">SUB17</option>
+                <option value="sub19">SUB19</option>
+                <option value="adulto">ADULTO</option>
               </select>
             </div>
             
@@ -657,6 +661,11 @@
               <input type="url" id="gameYoutube" placeholder="https://www.youtube.com/watch?v=...">
             </div>
             
+            <div class="form-group">
+              <label for="gameSumula">Link da Súmula (opcional):</label>
+              <input type="url" id="gameSumula" placeholder="https://exemplo.com/sumulas/jogo1.pdf">
+            </div>
+            
             <div id="scoresSection" style="display: none;">
               <h3 class="stats-title">Placar</h3>
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
@@ -682,7 +691,6 @@
             <div class="action-buttons">
               <button id="importGamesBtn" class="btn btn-warning">Importar JSON</button>
               <button id="exportGamesBtn" class="btn btn-success">Exportar Jogos</button>
-              <button id="clearGamesBtn" class="btn btn-secondary">Limpar Jogos</button>
             </div>
           </div>
         </div>
@@ -691,7 +699,7 @@
           <h2 class="form-title">Jogos Cadastrados <span id="gamesCount" class="counter">0</span></h2>
           
           <div id="gamesList">
-            <p style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum jogo cadastrado ainda.</p>
+            <p style="text-align: center; padding: 20px; color: #bdc3c7;">Nenhum jogo cadastrado ainda.</p>
           </div>
         </div>
       </div>
@@ -706,13 +714,13 @@
           <div class="form-group">
             <label for="standingsCategory">Categoria:</label>
             <select id="standingsCategory">
-              <option value="ADULTO">ADULTO</option>
-              <option value="SUB19">SUB19</option>
-              <option value="SUB17">SUB17</option>
-              <option value="SUB15">SUB15</option>
-              <option value="SUB13">SUB13</option>
-              <option value="SUB11">SUB11</option>
-              <option value="SUB9">SUB9</option>
+              <option value="adulto">ADULTO</option>
+              <option value="sub19">SUB19</option>
+              <option value="sub17">SUB17</option>
+              <option value="sub15">SUB15</option>
+              <option value="sub13">SUB13</option>
+              <option value="sub11">SUB11</option>
+              <option value="sub9">SUB9</option>
             </select>
           </div>
           
@@ -725,7 +733,6 @@
             <div class="action-buttons">
               <button id="importStandingsBtn" class="btn btn-warning">Importar JSON</button>
               <button id="exportStandingsBtn" class="btn btn-success">Exportar Classificação</button>
-              <button id="clearStandingsBtn" class="btn btn-secondary">Limpar Classificação</button>
             </div>
           </div>
         </div>
@@ -748,7 +755,7 @@
             </thead>
             <tbody id="standingsTable">
               <tr>
-                <td colspan="8" style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum dado de classificação disponível.</td>
+                <td colspan="8" style="text-align: center; padding: 20px; color: #bdc3c7;">Nenhum dado de classificação disponível.</td>
               </tr>
             </tbody>
           </table>
@@ -772,23 +779,8 @@
     </div>
   </div>
 
-  <!-- Modal de Confirmação para Limpar Dados -->
-  <div id="clearDataModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title">Confirmar Limpeza de Dados</h2>
-        <span class="close" onclick="closeModal('clearDataModal')">&times;</span>
-      </div>
-      <p id="clearDataMessage" style="margin-bottom: 20px;">Tem certeza que deseja limpar todos os dados?</p>
-      <div style="display: flex; gap: 10px; justify-content: flex-end;">
-        <button class="btn" onclick="closeModal('clearDataModal')">Cancelar</button>
-        <button class="btn btn-danger" id="confirmClearBtn">Limpar</button>
-      </div>
-    </div>
-  </div>
-
   <script>
-    // Dados da aplicação
+    // Dados da aplicação - INICIANDO ZERADOS
     let players = [];
     let teams = [];
     let games = [];
@@ -797,9 +789,13 @@
     let nextTeamId = 1;
     let nextGameId = 1;
     
+    // Função para normalizar categorias
+    function normalizeCategory(category) {
+      return category.toLowerCase();
+    }
+    
     // Inicialização
     document.addEventListener('DOMContentLoaded', function() {
-      loadAllData();
       setupEventListeners();
       updateAllLists();
       populateTeamSelects();
@@ -833,12 +829,6 @@
       document.getElementById('exportGamesBtn').addEventListener('click', () => exportJSON('games'));
       document.getElementById('exportStandingsBtn').addEventListener('click', () => exportJSON('standings'));
       
-      // Botões de limpeza
-      document.getElementById('clearPlayersBtn').addEventListener('click', () => confirmClearData('players'));
-      document.getElementById('clearTeamsBtn').addEventListener('click', () => confirmClearData('teams'));
-      document.getElementById('clearGamesBtn').addEventListener('click', () => confirmClearData('games'));
-      document.getElementById('clearStandingsBtn').addEventListener('click', () => confirmClearData('standings'));
-      
       // Status do jogo (mostrar/ocultar placar)
       document.getElementById('gameStatus').addEventListener('change', function() {
         document.getElementById('scoresSection').style.display = 
@@ -848,119 +838,37 @@
       // Atualizar classificação
       document.getElementById('updateStandingsBtn').addEventListener('click', updateStandings);
       document.getElementById('standingsCategory').addEventListener('change', function() {
-        document.getElementById('standingsCategoryTitle').textContent = this.value;
+        document.getElementById('standingsCategoryTitle').textContent = this.options[this.selectedIndex].text;
         displayStandings(this.value);
       });
     }
     
-    // Carregar todos os dados do localStorage
-    function loadAllData() {
-      // Carregar jogadores
-      const savedPlayers = localStorage.getItem('basketballPlayers');
-      if (savedPlayers) {
-        players = JSON.parse(savedPlayers);
-        if (players.length > 0) {
-          nextPlayerId = Math.max(...players.map(p => p.id)) + 1;
-        }
+    // Gerar ID único para times
+    function generateTeamId(name) {
+      const baseId = name.toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+      
+      let finalId = baseId;
+      let counter = 1;
+      
+      while (teams.some(team => team.id === finalId)) {
+        finalId = `${baseId}-${counter}`;
+        counter++;
       }
       
-      // Carregar times
-      const savedTeams = localStorage.getItem('basketballTeams');
-      if (savedTeams) {
-        teams = JSON.parse(savedTeams);
-        if (teams.length > 0) {
-          nextTeamId = Math.max(...teams.map(t => {
-            if (!isNaN(t.id)) return parseInt(t.id);
-            return 0;
-          })) + 1;
-        }
-      } else {
-        // Inicializar com alguns times de exemplo
-        teams = [
-          { id: "sport", name: "Sport Recife", logo: "https://sportrecife.com.br/wp-content/uploads/2024/06/image19.png", color: "#050000" },
-          { id: "nautico", name: "Náutico", logo: "https://upload.wikimedia.org/wikipedia/pt/d/de/Simbolo-escudo-nautico.png", color: "#f50202" },
-          { id: "santa-cruz", name: "Santa Cruz", logo: "https://logodownload.org/wp-content/uploads/2017/02/Santa-Cruz-fc-logo-escudo.png", color: "#b5b5b5" },
-          { id: "dino", name: "Dino Basquete", logo: "https://blogger.googleusercontent.com/img/a/AVvXsEgY3ec6pVg0Qib8BMvodjDynOkTuResrkisrcI0ZKZcyVibG2r1OtkG3Iuj1p8Unc-7Oklu4y16Ifpm4q_MHUJmxkFb1jkYLJTnnmn4qgLeqZMxkSHDiTsK-SS8h5MJ8OJx_lRQg8HhjYAT5W8bMgfXI3fVLP3tyBvH0GNJJOyHfbXw0aflvGtjIWjyhfHe", color: "#87007e" }
-        ];
-        saveData('teams');
-      }
-      
-      // Carregar jogos
-      const savedGames = localStorage.getItem('basketballGames');
-      if (savedGames) {
-        games = JSON.parse(savedGames);
-        if (games.length > 0) {
-          nextGameId = Math.max(...games.map(g => g.id)) + 1;
-        }
-      } else {
-        // Inicializar com alguns jogos de exemplo
-        games = [
-          {
-            "id": 1,
-            "date": "2023-10-15",
-            "time": "19:00",
-            "category": "ADULTO",
-            "homeTeam": "sport",
-            "awayTeam": "nautico",
-            "homeScore": 85,
-            "awayScore": 78,
-            "location": "Ginásio do Sport",
-            "status": "completed",
-            "youtube": "https://www.youtube.com/watch?v=abc123"
-          },
-          {
-            "id": 2,
-            "date": "2023-10-16",
-            "time": "20:00",
-            "category": "ADULTO",
-            "homeTeam": "santa-cruz",
-            "awayTeam": "dino",
-            "homeScore": 92,
-            "awayScore": 88,
-            "location": "Arena de Santa Cruz",
-            "status": "completed",
-            "youtube": "https://www.youtube.com/watch?v=def456"
-          }
-        ];
-        saveData('games');
-      }
-      
-      // Carregar classificação
-      const savedStandings = localStorage.getItem('basketballStandings');
-      if (savedStandings) {
-        standings = JSON.parse(savedStandings);
-      }
-    }
-    
-    // Salvar dados no localStorage
-    function saveData(type) {
-      switch(type) {
-        case 'players':
-          localStorage.setItem('basketballPlayers', JSON.stringify(players));
-          break;
-        case 'teams':
-          localStorage.setItem('basketballTeams', JSON.stringify(teams));
-          break;
-        case 'games':
-          localStorage.setItem('basketballGames', JSON.stringify(games));
-          break;
-        case 'standings':
-          localStorage.setItem('basketballStandings', JSON.stringify(standings));
-          break;
-      }
+      return finalId;
     }
     
     // Mudar de aba
     function switchTab(tab) {
-      // Desativar todas as abas
       document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
       
-      // Ativar a aba selecionada
       document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
       document.getElementById(`${tab}-tab`).classList.add('active');
       
-      // Se for a aba de classificação, atualizar a classificação
       if (tab === 'standings') {
         updateStandings();
       }
@@ -972,12 +880,10 @@
       const gameHomeTeamSelect = document.getElementById('gameHomeTeam');
       const gameAwayTeamSelect = document.getElementById('gameAwayTeam');
       
-      // Limpar selects
       playerTeamSelect.innerHTML = '<option value="">Selecione um time</option>';
       gameHomeTeamSelect.innerHTML = '<option value="">Selecione um time</option>';
       gameAwayTeamSelect.innerHTML = '<option value="">Selecione um time</option>';
       
-      // Adicionar opções
       teams.forEach(team => {
         const option = document.createElement('option');
         option.value = team.id;
@@ -997,14 +903,13 @@
       let player;
       
       if (playerId) {
-        // Modo edição
         const index = players.findIndex(p => p.id == playerId);
         if (index !== -1) {
           player = players[index];
           player.name = document.getElementById("playerName").value;
           player.number = parseInt(document.getElementById("playerNumber").value);
           player.teamId = document.getElementById("playerTeam").value;
-          player.category = document.getElementById("playerCategory").value;
+          player.category = normalizeCategory(document.getElementById("playerCategory").value);
           player.position = document.getElementById("playerPosition").value;
           player.photo = document.getElementById("playerPhoto").value || "";
           player.stats = {
@@ -1019,13 +924,12 @@
           showAlert('playersAlert', 'Jogador atualizado com sucesso!', 'success');
         }
       } else {
-        // Modo adição
         player = {
           id: nextPlayerId++,
           name: document.getElementById("playerName").value,
           number: parseInt(document.getElementById("playerNumber").value),
           teamId: document.getElementById("playerTeam").value,
-          category: document.getElementById("playerCategory").value,
+          category: normalizeCategory(document.getElementById("playerCategory").value),
           position: document.getElementById("playerPosition").value,
           photo: document.getElementById("playerPhoto").value || "",
           stats: {
@@ -1041,7 +945,6 @@
         showAlert('playersAlert', 'Jogador adicionado com sucesso!', 'success');
       }
       
-      saveData('players');
       updatePlayersList();
       document.getElementById("playerForm").reset();
       document.getElementById("playerId").value = "";
@@ -1056,7 +959,6 @@
       let team;
       
       if (teamId) {
-        // Modo edição
         const index = teams.findIndex(t => t.id == teamId);
         if (index !== -1) {
           team = teams[index];
@@ -1068,9 +970,8 @@
           showAlert('teamsAlert', 'Time atualizado com sucesso!', 'success');
         }
       } else {
-        // Modo adição - criar ID a partir do nome
         const teamName = document.getElementById("teamName").value;
-        const newId = teamName.toLowerCase().replace(/\s+/g, '-');
+        const newId = generateTeamId(teamName);
         
         team = {
           id: newId,
@@ -1083,7 +984,6 @@
         showAlert('teamsAlert', 'Time adicionado com sucesso!', 'success');
       }
       
-      saveData('teams');
       updateTeamsList();
       populateTeamSelects();
       document.getElementById("teamForm").reset();
@@ -1099,18 +999,18 @@
       let game;
       
       if (gameId) {
-        // Modo edição
         const index = games.findIndex(g => g.id == gameId);
         if (index !== -1) {
           game = games[index];
           game.date = document.getElementById("gameDate").value;
           game.time = document.getElementById("gameTime").value;
-          game.category = document.getElementById("gameCategory").value;
+          game.category = normalizeCategory(document.getElementById("gameCategory").value);
           game.homeTeam = document.getElementById("gameHomeTeam").value;
           game.awayTeam = document.getElementById("gameAwayTeam").value;
           game.location = document.getElementById("gameLocation").value;
           game.status = document.getElementById("gameStatus").value;
           game.youtube = document.getElementById("gameYoutube").value || null;
+          game.sumula = document.getElementById("gameSumula").value || null;
           
           if (game.status === 'completed') {
             game.homeScore = parseInt(document.getElementById("gameHomeScore").value) || 0;
@@ -1124,17 +1024,17 @@
           showAlert('gamesAlert', 'Jogo atualizado com sucesso!', 'success');
         }
       } else {
-        // Modo adição
         game = {
           id: nextGameId++,
           date: document.getElementById("gameDate").value,
           time: document.getElementById("gameTime").value,
-          category: document.getElementById("gameCategory").value,
+          category: normalizeCategory(document.getElementById("gameCategory").value),
           homeTeam: document.getElementById("gameHomeTeam").value,
           awayTeam: document.getElementById("gameAwayTeam").value,
           location: document.getElementById("gameLocation").value,
           status: document.getElementById("gameStatus").value,
-          youtube: document.getElementById("gameYoutube").value || null
+          youtube: document.getElementById("gameYoutube").value || null,
+          sumula: document.getElementById("gameSumula").value || null
         };
         
         if (game.status === 'completed') {
@@ -1149,8 +1049,8 @@
         showAlert('gamesAlert', 'Jogo adicionado com sucesso!', 'success');
       }
       
-      saveData('games');
       updateGamesList();
+      updateStandings();
       document.getElementById("gameForm").reset();
       document.getElementById("gameId").value = "";
       document.getElementById("scoresSection").style.display = 'none';
@@ -1170,7 +1070,7 @@
       const playersCount = document.getElementById("playersCount");
       
       if (players.length === 0) {
-        playersList.innerHTML = '<p style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum jogador cadastrado ainda.</p>';
+        playersList.innerHTML = '<p style="text-align: center; padding: 20px; color: #bdc3c7;">Nenhum jogador cadastrado ainda.</p>';
         playersCount.textContent = '0';
         return;
       }
@@ -1187,7 +1087,7 @@
         playerItem.innerHTML = `
           <div class="item-info">
             <div class="item-name">${player.name} (#${player.number})</div>
-            <div class="item-details">${team.name} • ${player.category} • ${player.position}</div>
+            <div class="item-details">${team.name} • ${player.category.toUpperCase()} • ${player.position}</div>
             <div class="item-details">Pontos: ${player.stats.points} | Rebotes: ${player.stats.rebounds} | Assist: ${player.stats.assists}</div>
           </div>
           <div class="item-actions">
@@ -1206,7 +1106,7 @@
       const teamsCount = document.getElementById("teamsCount");
       
       if (teams.length === 0) {
-        teamsList.innerHTML = '<p style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum time cadastrado ainda.</p>';
+        teamsList.innerHTML = '<p style="text-align: center; padding: 20px; color: #bdc3c7;">Nenhum time cadastrado ainda.</p>';
         teamsCount.textContent = '0';
         return;
       }
@@ -1239,7 +1139,7 @@
       const gamesCount = document.getElementById("gamesCount");
       
       if (games.length === 0) {
-        gamesList.innerHTML = '<p style="text-align: center; padding: 20px; color: #7f8c8d;">Nenhum jogo cadastrado ainda.</p>';
+        gamesList.innerHTML = '<p style="text-align: center; padding: 20px; color: #bdc3c7;">Nenhum jogo cadastrado ainda.</p>';
         gamesCount.textContent = '0';
         return;
       }
@@ -1247,7 +1147,6 @@
       gamesList.innerHTML = '';
       gamesCount.textContent = games.length;
       
-      // Ordenar jogos por data (mais recente primeiro)
       const sortedGames = [...games].sort((a, b) => new Date(b.date) - new Date(a.date));
       
       sortedGames.forEach(game => {
@@ -1269,13 +1168,22 @@
           scoreInfo = statusMap[game.status] || game.status;
         }
         
+        let actionButtons = '';
+        if (game.youtube) {
+          actionButtons += `<a href="${game.youtube}" target="_blank" class="btn btn-action btn-danger">YouTube</a>`;
+        }
+        if (game.sumula) {
+          actionButtons += `<a href="${game.sumula}" target="_blank" class="btn btn-action btn-purple">Súmula</a>`;
+        }
+        
         gameItem.innerHTML = `
           <div class="item-info">
             <div class="item-name">${homeTeam.name} vs ${awayTeam.name}</div>
-            <div class="item-details">${game.date} ${game.time} • ${game.category} • ${game.location}</div>
+            <div class="item-details">${game.date} ${game.time} • ${game.category.toUpperCase()} • ${game.location}</div>
             <div class="item-details">${scoreInfo}</div>
           </div>
           <div class="item-actions">
+            ${actionButtons}
             <button class="btn btn-warning btn-action" onclick="editGame(${game.id})">Editar</button>
             <button class="btn btn-danger btn-action" onclick="confirmDelete('game', ${game.id})">Excluir</button>
           </div>
@@ -1290,7 +1198,6 @@
       const player = players.find(p => p.id === id);
       if (!player) return;
       
-      // Preencher o formulário
       document.getElementById("playerId").value = player.id;
       document.getElementById("playerName").value = player.name;
       document.getElementById("playerNumber").value = player.number;
@@ -1304,10 +1211,7 @@
       document.getElementById("playerSteals").value = player.stats.steals;
       document.getElementById("playerBlocks").value = player.stats.blocks;
       
-      // Mudar texto do botão
       document.getElementById("playerSubmitBtn").textContent = "Atualizar Jogador";
-      
-      // Rolar para o topo do formulário
       document.getElementById("playerForm").scrollIntoView();
     }
     
@@ -1316,16 +1220,12 @@
       const team = teams.find(t => t.id === id);
       if (!team) return;
       
-      // Preencher o formulário
       document.getElementById("teamId").value = team.id;
       document.getElementById("teamName").value = team.name;
       document.getElementById("teamLogo").value = team.logo;
       document.getElementById("teamColor").value = team.color;
       
-      // Mudar texto do botão
       document.getElementById("teamSubmitBtn").textContent = "Atualizar Time";
-      
-      // Rolar para o topo do formulário
       document.getElementById("teamForm").scrollIntoView();
     }
     
@@ -1334,7 +1234,6 @@
       const game = games.find(g => g.id === id);
       if (!game) return;
       
-      // Preencher o formulário
       document.getElementById("gameId").value = game.id;
       document.getElementById("gameDate").value = game.date;
       document.getElementById("gameTime").value = game.time;
@@ -1344,6 +1243,7 @@
       document.getElementById("gameLocation").value = game.location;
       document.getElementById("gameStatus").value = game.status;
       document.getElementById("gameYoutube").value = game.youtube || "";
+      document.getElementById("gameSumula").value = game.sumula || "";
       
       if (game.status === 'completed') {
         document.getElementById("gameHomeScore").value = game.homeScore;
@@ -1353,10 +1253,7 @@
         document.getElementById("scoresSection").style.display = 'none';
       }
       
-      // Mudar texto do botão
       document.getElementById("gameSubmitBtn").textContent = "Atualizar Jogo";
-      
-      // Rolar para o topo do formulário
       document.getElementById("gameForm").scrollIntoView();
     }
     
@@ -1404,12 +1301,10 @@
       switch(type) {
         case 'player':
           players = players.filter(player => player.id !== id);
-          saveData('players');
           updatePlayersList();
           showAlert('playersAlert', 'Jogador excluído com sucesso!', 'success');
           break;
         case 'team':
-          // Verificar se o time está sendo usado em jogadores ou jogos
           const playersWithTeam = players.filter(p => p.teamId === id);
           const gamesWithTeam = games.filter(g => g.homeTeam === id || g.awayTeam === id);
           
@@ -1419,103 +1314,15 @@
           }
           
           teams = teams.filter(team => team.id !== id);
-          saveData('teams');
           updateTeamsList();
           populateTeamSelects();
           showAlert('teamsAlert', 'Time excluído com sucesso!', 'success');
           break;
         case 'game':
           games = games.filter(game => game.id !== id);
-          saveData('games');
           updateGamesList();
+          updateStandings();
           showAlert('gamesAlert', 'Jogo excluído com sucesso!', 'success');
-          break;
-      }
-    }
-    
-    // Confirmar limpeza de dados
-    function confirmClearData(type) {
-      const modal = document.getElementById("clearDataModal");
-      const message = document.getElementById("clearDataMessage");
-      const confirmBtn = document.getElementById("confirmClearBtn");
-      
-      let itemName = "";
-      let count = 0;
-      
-      switch(type) {
-        case 'players':
-          itemName = "todos os jogadores";
-          count = players.length;
-          break;
-        case 'teams':
-          itemName = "todos os times";
-          count = teams.length;
-          break;
-        case 'games':
-          itemName = "todos os jogos";
-          count = games.length;
-          break;
-        case 'standings':
-          itemName = "todas as classificações";
-          count = Object.keys(standings).length;
-          break;
-      }
-      
-      if (count === 0) {
-        showAlert(`${type}Alert`, `Não há ${itemName} para limpar.`, 'error');
-        return;
-      }
-      
-      message.textContent = `Tem certeza que deseja limpar ${itemName}? Esta ação não pode ser desfeita.`;
-      
-      confirmBtn.onclick = function() {
-        clearData(type);
-        closeModal('clearDataModal');
-      };
-      
-      modal.style.display = "flex";
-    }
-    
-    // Limpar dados
-    function clearData(type) {
-      switch(type) {
-        case 'players':
-          players = [];
-          nextPlayerId = 1;
-          saveData('players');
-          updatePlayersList();
-          showAlert('playersAlert', 'Todos os jogadores foram removidos com sucesso!', 'success');
-          break;
-        case 'teams':
-          // Verificar se há jogadores ou jogos usando os times
-          if (players.length > 0) {
-            showAlert('teamsAlert', 'Não é possível limpar os times pois existem jogadores associados a eles.', 'error');
-            return;
-          }
-          
-          if (games.length > 0) {
-            showAlert('teamsAlert', 'Não é possível limpar os times pois existem jogos associados a eles.', 'error');
-            return;
-          }
-          
-          teams = [];
-          saveData('teams');
-          updateTeamsList();
-          populateTeamSelects();
-          showAlert('teamsAlert', 'Todos os times foram removidos com sucesso!', 'success');
-          break;
-        case 'games':
-          games = [];
-          nextGameId = 1;
-          saveData('games');
-          updateGamesList();
-          showAlert('gamesAlert', 'Todos os jogos foram removidos com sucesso!', 'success');
-          break;
-        case 'standings':
-          standings = {};
-          saveData('standings');
-          displayStandings(document.getElementById('standingsCategory').value);
-          showAlert('standingsAlert', 'Todas as classificações foram removidas com sucesso!', 'success');
           break;
       }
     }
@@ -1547,7 +1354,6 @@
                 return;
               }
               
-              // Validar estrutura dos jogadores
               const validPlayers = importedData.filter(player => 
                 player.name && player.number !== undefined && player.teamId && player.category && player.position
               );
@@ -1557,16 +1363,19 @@
                 return;
               }
               
-              // Adicionar IDs aos jogadores importados se necessário
               validPlayers.forEach(player => {
+                player.category = normalizeCategory(player.category);
                 if (!player.id) {
                   player.id = nextPlayerId++;
+                } else {
+                  const playerId = parseInt(player.id);
+                  if (playerId >= nextPlayerId) {
+                    nextPlayerId = playerId + 1;
+                  }
                 }
               });
               
-              // Adicionar jogadores à lista
               players = [...players, ...validPlayers];
-              saveData('players');
               updatePlayersList();
               showAlert('playersAlert', `${validPlayers.length} jogador(es) importado(s) com sucesso!`, 'success');
               break;
@@ -1577,8 +1386,7 @@
                 return;
               }
               
-              // Validar estrutura dos times
-              const validTeams = importedData.filter(team => 
+              let validTeams = importedData.filter(team => 
                 team.id && team.name
               );
               
@@ -1587,9 +1395,18 @@
                 return;
               }
               
-              // Adicionar times à lista
+              const duplicateTeams = validTeams.filter(team => 
+                teams.some(existingTeam => existingTeam.id === team.id)
+              );
+              
+              if (duplicateTeams.length > 0) {
+                showAlert('teamsAlert', `${duplicateTeams.length} time(s) com IDs duplicados não foram importados.`, 'error');
+                validTeams = validTeams.filter(team => 
+                  !teams.some(existingTeam => existingTeam.id === team.id)
+                );
+              }
+              
               teams = [...teams, ...validTeams];
-              saveData('teams');
               updateTeamsList();
               populateTeamSelects();
               showAlert('teamsAlert', `${validTeams.length} time(s) importado(s) com sucesso!`, 'success');
@@ -1601,27 +1418,43 @@
                 return;
               }
               
-              // Validar estrutura dos jogos
               const validGames = importedData.filter(game => 
                 game.date && game.time && game.category && game.homeTeam && game.awayTeam && game.location && game.status
-              );
+              ).map(game => {
+                game.category = normalizeCategory(game.category);
+                game.youtube = game.youtube || null;
+                game.sumula = game.sumula || null;
+                
+                if (game.status === 'completed') {
+                  game.homeScore = game.homeScore || 0;
+                  game.awayScore = game.awayScore || 0;
+                } else {
+                  game.homeScore = null;
+                  game.awayScore = null;
+                }
+                
+                return game;
+              });
               
               if (validGames.length === 0) {
                 showAlert('gamesAlert', 'Nenhum jogo válido encontrado no arquivo.', 'error');
                 return;
               }
               
-              // Adicionar IDs aos jogos importados se necessário
               validGames.forEach(game => {
                 if (!game.id) {
                   game.id = nextGameId++;
+                } else {
+                  const gameId = parseInt(game.id);
+                  if (gameId >= nextGameId) {
+                    nextGameId = gameId + 1;
+                  }
                 }
               });
               
-              // Adicionar jogos à lista
               games = [...games, ...validGames];
-              saveData('games');
               updateGamesList();
+              updateStandings();
               showAlert('gamesAlert', `${validGames.length} jogo(s) importado(s) com sucesso!`, 'success');
               break;
               
@@ -1632,8 +1465,8 @@
               }
               
               standings = importedData;
-              saveData('standings');
-              displayStandings(document.getElementById('standingsCategory').value);
+              const currentCategory = document.getElementById('standingsCategory').value;
+              displayStandings(currentCategory);
               showAlert('standingsAlert', 'Classificação importada com sucesso!', 'success');
               break;
           }
@@ -1698,84 +1531,71 @@
       showAlert(`${type}Alert`, `Dados exportados com sucesso em ${fileName}!`, 'success');
     }
     
-    // Atualizar classificação
+    // Atualizar classificação automaticamente a partir dos jogos
     function updateStandings() {
       const category = document.getElementById('standingsCategory').value;
       
-      // Inicializar classificação para a categoria se não existir
       if (!standings[category]) {
         standings[category] = [];
       }
       
-      // Obter todos os times que jogam nesta categoria
-      const categoryTeams = new Set();
+      const allTeams = teams.map(team => team.id);
       
-      // Adicionar times dos jogadores desta categoria
-      players
-        .filter(player => player.category === category)
-        .forEach(player => categoryTeams.add(player.teamId));
-      
-      // Adicionar times dos jogos desta categoria
-      games
-        .filter(game => game.category === category)
-        .forEach(game => {
-          categoryTeams.add(game.homeTeam);
-          categoryTeams.add(game.awayTeam);
-        });
-      
-      // Inicializar estatísticas para cada time
       const teamStats = {};
-      categoryTeams.forEach(teamId => {
-        if (!teamStats[teamId]) {
-          teamStats[teamId] = {
-            teamId: teamId,
-            played: 0,
-            wins: 0,
-            losses: 0,
-            pointsFor: 0,
-            pointsAgainst: 0,
-            points: 0
-          };
-        }
+      allTeams.forEach(teamId => {
+        teamStats[teamId] = {
+          teamId: teamId,
+          played: 0,
+          wins: 0,
+          losses: 0,
+          pointsFor: 0,
+          pointsAgainst: 0,
+          points: 0
+        };
       });
       
-      // Processar jogos concluídos desta categoria
       games
-        .filter(game => game.category === category && game.status === 'completed')
+        .filter(game => normalizeCategory(game.category) === category && game.status === 'completed')
         .forEach(game => {
           const homeTeam = game.homeTeam;
           const awayTeam = game.awayTeam;
           
-          // Atualizar estatísticas apenas se ambos os times estão na categoria
           if (teamStats[homeTeam] && teamStats[awayTeam]) {
             teamStats[homeTeam].played++;
             teamStats[awayTeam].played++;
             
-            teamStats[homeTeam].pointsFor += game.homeScore;
-            teamStats[homeTeam].pointsAgainst += game.awayScore;
+            const homeScore = parseInt(game.homeScore) || 0;
+            const awayScore = parseInt(game.awayScore) || 0;
             
-            teamStats[awayTeam].pointsFor += game.awayScore;
-            teamStats[awayTeam].pointsAgainst += game.homeScore;
+            teamStats[homeTeam].pointsFor += homeScore;
+            teamStats[homeTeam].pointsAgainst += awayScore;
             
-            if (game.homeScore > game.awayScore) {
+            teamStats[awayTeam].pointsFor += awayScore;
+            teamStats[awayTeam].pointsAgainst += homeScore;
+            
+            if (homeScore > awayScore) {
               teamStats[homeTeam].wins++;
               teamStats[awayTeam].losses++;
               teamStats[homeTeam].points += 2;
-            } else {
+            } else if (homeScore < awayScore) {
               teamStats[awayTeam].wins++;
               teamStats[homeTeam].losses++;
               teamStats[awayTeam].points += 2;
+            } else {
+              teamStats[homeTeam].points += 1;
+              teamStats[awayTeam].points += 1;
             }
           }
         });
       
-      // Converter objeto em array e ordenar por pontos (e depois por vitórias)
       standings[category] = Object.values(teamStats).sort((a, b) => {
         if (b.points !== a.points) return b.points - a.points;
-        return b.wins - a.wins;
+        if (b.wins !== a.wins) return b.wins - a.wins;
+        const diffA = a.pointsFor - a.pointsAgainst;
+        const diffB = b.pointsFor - b.pointsAgainst;
+        return diffB - diffA;
       });
       
-      saveData('standings');
       displayStandings(category);
       showAlert('standingsAlert', 'Classificação atualizada com sucesso!', 'success');
     }
@@ -1787,8 +1607,8 @@
       if (!standings[category] || standings[category].length === 0) {
         standingsTable.innerHTML = `
           <tr>
-            <td colspan="8" style="text-align: center; padding: 20px; color: #7f8c8d;">
-              Nenhum dado de classificação disponível para ${category}.
+            <td colspan="8" style="text-align: center; padding: 20px; color: #bdc3c7;">
+              Nenhum dado de classificação disponível para ${category.toUpperCase()}.
             </td>
           </tr>
         `;

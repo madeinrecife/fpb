@@ -4,6 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pernambuco BasketStats</title>
+  
+  <!-- Meta tags para PWA -->
+  <meta name="theme-color" content="#1a5fce">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pernambuco BasketStats">
+  <meta name="description" content="Estatísticas do Campeonato Pernambucano de Basquete">
+  <meta name="keywords" content="basquete, pernambuco, estatísticas, jogos, classificação">
+  
+  <!-- Ícones para PWA -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9IiMxYTVmY2UiLz4KPHBhdGggZD0iTTk2IDM2QzY2LjQgMzYgNDIgNjAuNCA0MiA5MEM0MiAxMTkuNiA2Ni40IDE0NCA5NiAxNDRDMTI1LjYgMTQ0IDE1MCAxMTkuNiAxNTAgOTBDMTUwIDYwLjQgMTI1LjYgMzYgOTYgMzZaIiBmaWxsPSIjZmZjYTI4Ii8+CjxwYXRoIGQ9Ik03OCA3MkM3OCA2OC42OCA4MC42OCA2NiA4NCA2NkgxMDhDMTA4LjggNjYgMTA5LjUgNjYuMjcgMTEwLjEgNjYuNzJDMTEwLjYgNjcuMTcgMTExIDY3LjgyIDExMSA2OC41VjExMy41QzExMSAxMTQuMiAxMTAuNiAxMTQuOCAxMTAuMSAxMTUuM0MxMDkuNSAxMTUuNyAxMDguOCAxMTYgMTA4IDExNkg4NEM4MC42OCAxMTYgNzggMTEzLjMgNzggMTEwVjcyWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTExNCA3MkMxMTQgNjguNjggMTE2LjcgNjYgMTIwIDY2SDE0NEMxNDQuOCA2NiAxNDUuNSA2Ni4yNyAxNDYuMSA2Ni43MkMxNDYuNiA2Ny4xNyAxNDcgNjcuODIgMTQ3IDY4LjVWMTEzLjVDMTQ3IDExNC4yIDE0Ni42IDExNC44IDE0Ni4xIDExNS4zQzE0NS41IDExNS43IDE0NC44IDExNiAxNDQgMTE2SDEyMEMxMTYuNyAxMTYgMTE0IDExMy4zIDExNCAxMTBWNzJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9IiMxYTVmY2UiLz4KPHBhdGggZD0iTTk2IDM2QzY2LjQgMzYgNDIgNjAuNCA0MiA5MEM0MiAxMTkuNiA2Ni40IDE0NCA5NiAxNDRDMTI1LjYgMTQ0IDE1MCAxMTkuNiAxNTAgOTBDMTUwIDYwLjQgMTI1LjYgMzYgOTYgMzZaIiBmaWxsPSIjZmZjYTI4Ii8+CjxwYXRoIGQ9Ik03OCA3MkM3OCA2OC42OCA4MC42OCA2NiA4NCA2NkgxMDhDMTA4LjggNjYgMTA5LjUgNjYuMjcgMTEwLjEgNjYuNzJDMTEwLjYgNjcuMTcgMTExIDY3LjgyIDExMSA2OC41VjExMy41QzExMSAxMTQuMiAxMTAuNiAxMTQuOCAxMTAuMSAxMTUuM0MxMDkuNSAxMTUuNyAxMDguOCAxMTYgMTA4IDExNkg4NEM4MC42OCAxMTYgNzggMTEzLjMgNzggMTEwVjcyWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTExNCA3MkMxMTQgNjguNjggMTE2LjcgNjYgMTIwIDY2SDE0NEMxNDQuOCA2NiAxNDUuNSA2Ni4yNyAxNDYuMSA2Ni43MkMxNDYuNiA2Ny4xNyAxNDcgNjcuODIgMTQ3IDY4LjVWMTEzLjVDMTQ3IDExNC4yIDE0Ni42IDExNC44IDE0Ni4xIDExNS4zQzE0NS41IDExNS43IDE0NC44IDExNiAxNDQgMTE2SDEyMEMxMTYuNyAxMTYgMTE0IDExMy4zIDExNCAxMTBWNzJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+  
+  <!-- Manifest para PWA -->
+  <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlBlcm5hbWJ1Y28gQmFza2V0U3RhdHMiLAogICJzaG9ydF9uYW1lIjogIkJhc2tldFN0YXRzIiwKICAiZGVzY3JpcHRpb24iOiAiRXN0YXTDrXN0aWNhcyBkbyBDYW1wZW9uYXRvIFBlcm5hbWJ1Y2FubyBkZSBCYXNxdWV0ZSIsCiAgInN0YXJ0X3VybCIgOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgInRoZW1lX2NvbG9yIjogIiMxYTVmY2UiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMxMjEyMTIiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSEJ5YjJacGJHVWlJSFpwWlhkQ2IzZzlJakFnTUNBek5UQWdNelV3SWo0TkNpQWdJQ0E4YzNSNWJHVStMbU52YlM5bWRXNXBiR1ZoZEdVdlltRnNkV1VpSUdacGJHdzlJbTV2Ym1VaUlIWnBaMmgwUFNJeE1EQWxJaUJtYVd4c1BTSm5jbVZsYmlJZ1ptbHNiRDBpSTJabVptWm1aaUlpOCtDZ2s4YzNSNWJHVStMbU52YlM5bWRXNXBiR1ZoZEdVdlltRnNkV1VpSUdacGJHdzlJbTV2Ym1VaUlIWnBaMmgwUFNJeE1EQWxJaUJtYVd4c1BTSm5jbVZsYmlJZ1ptbHNiRDBpSTJabVptWm1aaUlpOCtDZ2s4YzNSNWJHVStMbU52YlM5bWRXNXBiR1ZoZEdVdlltRnNkV1VpSUdacGJHdzlJbTV2Ym1VaUlIWnBaMmgwUFNJeE1EQWxJaUJtYVd4c1BTSm5jbVZsYmlJZ1ptbHNiRDBpSTJabVptWm1aaUlpOCtDZ2s4WnlCbWFXeHNQU0puY21WbGJpSWdjM1J5YjJ0bExYZHBaSFJvUFNJNE5pSWdkbWxsZDBKdmVEMGlNQ0F3SURFd01TQTJNRElpSUdacGJIUmxjbTQ5SW0xcFpHUnpJaUI0YkdsdWF6cG9jbVZtUFNJamJHbHVhV0ZzSWk4K0NnazhjM1I1YkdVK0xtTnZiUzltZFc1cGJHVmhkR1V2WW1Gc2RXVWlJR1pwYkd3OUltNXZibVVpSUhacFoyaDBQU0l4TURBbElpQm1hV3hzUFNKbmNtVmxiaUlnWm1sc2JEMGlJMlptWm1abVppSWk4K0NnazhjM1I1YkdVK0xtTnZiUzltZFc1cGJHVmhkR1V2WW1Gc2RXVWlJR1pwYkd3OUltNXZibVVpSUhacFoyaDBQU0l4TURBbElpQm1hV3hzUFNKbmNtVmxiaUlnWm1sc2JEMGlJMlptWm1abVppSWk4K0NnazhMM04yWno0PSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0KICBdCn0=">
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -683,6 +699,35 @@
       transform: translateY(-2px);
     }
 
+    /* Botão de instalação do PWA */
+    .install-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: var(--background);
+      border: none;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .install-btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    .install-btn.hidden {
+      display: none;
+    }
+
     /* ======== Footer ======== */
     footer {
       text-align: center;
@@ -791,6 +836,13 @@
         width: 100%;
         justify-content: center;
       }
+
+      .install-btn {
+        bottom: 10px;
+        right: 10px;
+        padding: 10px 16px;
+        font-size: 0.8rem;
+      }
     }
 
     @media (max-width: 576px) {
@@ -810,6 +862,17 @@
       .game-logo-container {
         width: 50px;
         height: 50px;
+      }
+    }
+
+    /* Estilos para modo standalone (quando instalado) */
+    @media all and (display-mode: standalone) {
+      header {
+        padding-top: env(safe-area-inset-top);
+      }
+      
+      body {
+        padding-bottom: env(safe-area-inset-bottom);
       }
     }
   </style>
@@ -933,6 +996,11 @@
     </section>
   </main>
 
+  <!-- Botão de instalação do PWA -->
+  <button id="installBtn" class="install-btn hidden">
+    <i class="fas fa-download"></i> Instalar App
+  </button>
+
   <footer>
     <p>&copy; 2025 Pernambuco BasketStats - Todos os direitos reservados</p>
   </footer>
@@ -943,6 +1011,43 @@
     let standings = {};
     let peTeams = [];
     let currentTeamFilter = "all";
+    let deferredPrompt;
+
+    // Service Worker para PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then((registration) => {
+          console.log('SW registered: ', registration);
+        }).catch((registrationError) => {
+          console.log('SW registration failed: ', registrationError);
+        });
+      });
+    }
+
+    // Gerenciar instalação do PWA
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const installBtn = document.getElementById('installBtn');
+      installBtn.classList.remove('hidden');
+      
+      installBtn.addEventListener('click', () => {
+        installBtn.classList.add('hidden');
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('Usuário aceitou a instalação');
+          }
+          deferredPrompt = null;
+        });
+      });
+    });
+
+    window.addEventListener('appinstalled', () => {
+      console.log('PWA foi instalado');
+      document.getElementById('installBtn').classList.add('hidden');
+      deferredPrompt = null;
+    });
 
     async function loadData() {
       try {
